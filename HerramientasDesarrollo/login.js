@@ -26,3 +26,9 @@ function mostrarPassword(id, boton) {
     icono.classList.add("fa-eye");
   }
 }
+
+const parametros = new URLSearchParams(window.location.search);
+
+if (parametros.get("registro") === "true") {
+  mostrarRegistro();
+}
