@@ -1,0 +1,492 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background: #0a0f1e;
+  font-family: "Inter", sans-serif;
+  color: white;
+}
+
+.btn-volver {
+  position: fixed;
+  top: 25px;
+  left: 30px;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  color: #ffffff80;
+  text-decoration: none;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  padding: 9px 14px;
+
+  border: 1px solid #ffffff15;
+  border-radius: 6px;
+
+  background: #ffffff05;
+
+  transition: all 0.3s;
+
+  z-index: 10;
+}
+
+.btn-volver i {
+  font-size: 12px;
+}
+
+.btn-volver:hover {
+  color: white;
+  border-color: #2563eb60;
+  background: #2563eb15;
+}
+
+.pagina-login {
+  min-height: 100vh;
+  display: flex;
+}
+
+.presentacion {
+  width: 50%;
+  min-height: 100vh;
+  background: #0a0f1e;
+  border-right: 1px solid #ffffff15;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 60px;
+}
+
+.presentacion-contenido {
+  width: 100%;
+  max-width: 620px;
+}
+
+.logo-cfbd {
+  width: 70px;
+  height: 70px;
+
+  display: flex;
+
+  margin-bottom: 28px;
+}
+
+.logo-cfbd span {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: white;
+}
+
+.etiqueta {
+  color: #2563eb;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+
+  margin-bottom: 18px;
+}
+
+.presentacion h1 {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -1px;
+
+  margin-bottom: 24px;
+}
+
+.presentacion h1 span {
+  color: #2563eb;
+}
+
+.caracteristicas {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.caracteristica {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.icono {
+  min-width: 44px;
+  width: 44px;
+  height: 44px;
+
+  background: #2563eb20;
+  border: 1px solid #2563eb50;
+  border-radius: 8px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #2563eb;
+}
+
+.caracteristica h3 {
+  font-size: 15px;
+  font-weight: 600;
+
+  margin-bottom: 5px;
+}
+
+.caracteristica p {
+  color: #ffffff60;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.copyright {
+  margin-top: 55px;
+
+  color: #ffffff35;
+  font-size: 12px;
+}
+
+.formulario-seccion {
+  width: 50%;
+  min-height: 100vh;
+
+  background: #0d1426;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 50px;
+}
+
+.formulario-contenedor {
+  width: 100%;
+  max-width: 460px;
+}
+
+.formulario {
+  display: none;
+}
+
+.formulario.activo {
+  display: block;
+  animation: aparecer 0.3s ease;
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.formulario-header {
+  margin-bottom: 34px;
+}
+
+.formulario-header h2 {
+  font-size: 32px;
+  font-weight: 700;
+
+  margin-bottom: 10px;
+}
+
+.formulario-header p {
+  color: #ffffff60;
+  font-size: 14px;
+}
+
+.campo {
+  margin-bottom: 20px;
+}
+
+.campo label {
+  display: block;
+
+  color: #ffffffd0;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  margin-bottom: 8px;
+}
+
+.input-con-icono {
+  position: relative;
+}
+
+.input-con-icono > i:first-child {
+  position: absolute;
+
+  left: 16px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  color: #ffffff40;
+
+  font-size: 14px;
+
+  pointer-events: none;
+}
+
+.input-con-icono input {
+  width: 100%;
+  height: 48px;
+
+  background: #ffffff06;
+
+  border: 1px solid #ffffff18;
+  border-radius: 6px;
+
+  padding: 0 48px;
+
+  color: white;
+
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+
+  outline: none;
+
+  transition: all 0.3s;
+}
+
+.input-con-icono input::placeholder {
+  color: #ffffff35;
+}
+
+.input-con-icono input:focus {
+  border-color: #2563eb;
+  background: #ffffff0a;
+  box-shadow: 0 0 0 3px #2563eb15;
+}
+
+.mostrar-password {
+  position: absolute;
+
+  right: 14px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  border: none;
+  background: transparent;
+
+  color: #ffffff40;
+
+  cursor: pointer;
+
+  padding: 5px;
+}
+
+.mostrar-password:hover {
+  color: white;
+}
+
+.opciones {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin: 8px 0 24px;
+
+  font-size: 12px;
+}
+
+.recordarme {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  color: #ffffff60;
+
+  cursor: pointer;
+}
+
+.recordarme input,
+.terminos input {
+  accent-color: #2563eb;
+}
+
+.opciones a {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.opciones a:hover {
+  text-decoration: underline;
+}
+
+.btn-principal {
+  width: 100%;
+  height: 48px;
+
+  background: #2563eb;
+
+  border: none;
+  border-radius: 6px;
+
+  color: white;
+
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  transition: all 0.3s;
+}
+
+.btn-principal:hover {
+  background: #1a4fd8;
+
+  transform: translateY(-1px);
+}
+
+.btn-principal i {
+  font-size: 12px;
+}
+
+.separador {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  margin: 28px 0;
+}
+
+.separador::before,
+.separador::after {
+  content: "";
+
+  flex: 1;
+
+  height: 1px;
+
+  background: #ffffff12;
+}
+
+.separador span {
+  color: #ffffff35;
+  font-size: 12px;
+}
+
+.cambiar-formulario {
+  text-align: center;
+
+  color: #ffffff50;
+
+  font-size: 13px;
+}
+
+.cambiar-formulario button {
+  border: none;
+  background: none;
+
+  color: #2563eb;
+
+  font-family: "Inter", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  margin-left: 4px;
+}
+
+.cambiar-formulario button:hover {
+  text-decoration: underline;
+}
+
+.fila {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.terminos {
+  margin: 5px 0 24px;
+
+  color: #ffffff50;
+
+  font-size: 12px;
+}
+
+.terminos label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .pagina-login {
+    flex-direction: column;
+  }
+
+  .presentacion,
+  .formulario-seccion {
+    width: 100%;
+  }
+
+  .presentacion {
+    min-height: auto;
+    padding: 50px 30px;
+  }
+
+  .formulario-seccion {
+    min-height: auto;
+    padding: 60px 30px;
+  }
+
+  .presentacion h1 {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 550px) {
+  .presentacion {
+    padding: 40px 24px;
+  }
+
+  .formulario-seccion {
+    padding: 45px 24px;
+  }
+
+  .presentacion h1 {
+    font-size: 34px;
+  }
+
+  .fila {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .opciones {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}

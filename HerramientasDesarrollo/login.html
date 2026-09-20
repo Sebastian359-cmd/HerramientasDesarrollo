@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CFBD | Iniciar sesión</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="login.css" />
+  </head>
+
+  <body>
+    <a href="index.html" class="btn-volver">
+      <i class="fa-solid fa-arrow-left"></i>
+      Volver
+    </a>
+
+    <main class="pagina-login">
+      <section class="presentacion">
+        <div class="presentacion-contenido">
+          <div class="logo-cfbd">
+            <img
+              src="https://www.cfbd.co/imgs/CFBD_LOGO%20BLANCO.svg"
+              alt="CFBD"
+              height="70"
+              width="150"
+            />
+          </div>
+
+          <p class="etiqueta">SOLUCIONES TECNOLÓGICAS</p>
+
+          <h1>
+            Seguridad inteligente,
+            <span>información conectada.</span>
+          </h1>
+
+          <div class="caracteristicas">
+            <div class="caracteristica">
+              <div class="icono">
+                <i class="fa-solid fa-network-wired"></i>
+              </div>
+
+              <div>
+                <h3>Orquestación de eventos</h3>
+                <p>
+                  Integra diferentes fuentes de información en una única
+                  plataforma.
+                </p>
+              </div>
+            </div>
+
+            <div class="caracteristica">
+              <div class="icono">
+                <i class="fa-solid fa-video"></i>
+              </div>
+
+              <div>
+                <h3>Análisis de videovigilancia</h3>
+                <p>
+                  Identifica patrones y comportamientos sospechosos mediante
+                  análisis de video.
+                </p>
+              </div>
+            </div>
+
+            <div class="caracteristica">
+              <div class="icono">
+                <i class="fa-solid fa-ticket"></i>
+              </div>
+
+              <div>
+                <h3>Gestión de soporte</h3>
+                <p>
+                  Gestiona solicitudes y requerimientos mediante un sistema de
+                  tickets.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <p class="copyright">© 2026 CFBD. Todos los derechos reservados.</p>
+        </div>
+      </section>
+
+      <section class="formulario-seccion">
+        <div class="formulario-contenedor">
+          <div class="formulario activo" id="formLogin">
+            <div class="formulario-header">
+              <h2>Bienvenido</h2>
+
+              <p>Ingresa a tu cuenta para continuar.</p>
+            </div>
+
+            <form>
+              <div class="campo">
+                <label for="correoLogin"> Correo electrónico </label>
+
+                <div class="input-con-icono">
+                  <i class="fa-regular fa-envelope"></i>
+
+                  <input
+                    type="email"
+                    id="correoLogin"
+                    placeholder="correo@ejemplo.com"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="campo">
+                <label for="passwordLogin"> Contraseña </label>
+
+                <div class="input-con-icono">
+                  <i class="fa-solid fa-lock"></i>
+
+                  <input
+                    type="password"
+                    id="passwordLogin"
+                    placeholder="Ingresa tu contraseña"
+                    required
+                  />
+
+                  <button
+                    type="button"
+                    class="mostrar-password"
+                    onclick="mostrarPassword('passwordLogin', this)"
+                  >
+                    <i class="fa-regular fa-eye"></i>
+                  </button>
+                </div>
+              </div>
+
+              <button type="submit" class="btn-principal">
+                Ingresar
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </form>
+
+            <div class="separador">
+              <span>o</span>
+            </div>
+
+            <p class="cambiar-formulario">
+              ¿No tienes una cuenta?
+
+              <button type="button" onclick="mostrarRegistro()">
+                Registrarse
+              </button>
+            </p>
+          </div>
+
+          <div class="formulario" id="formRegistro">
+            <div class="formulario-header">
+              <h2>Crear cuenta</h2>
+
+              <p>Regístrate para acceder a CFBD.</p>
+            </div>
+
+            <form>
+              <div class="fila">
+                <div class="campo">
+                  <label for="nombre"> Nombre </label>
+
+                  <div class="input-con-icono">
+                    <i class="fa-regular fa-user"></i>
+
+                    <input
+                      type="text"
+                      id="nombre"
+                      placeholder="Tu nombre"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="campo">
+                  <label for="apellido"> Apellido </label>
+
+                  <div class="input-con-icono">
+                    <i class="fa-regular fa-user"></i>
+
+                    <input
+                      type="text"
+                      id="apellido"
+                      placeholder="Tu apellido"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="campo">
+                <label for="correoRegistro"> Correo electrónico </label>
+
+                <div class="input-con-icono">
+                  <i class="fa-regular fa-envelope"></i>
+
+                  <input
+                    type="email"
+                    id="correoRegistro"
+                    placeholder="correo@ejemplo.com"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="campo">
+                <label for="passwordRegistro"> Contraseña </label>
+
+                <div class="input-con-icono">
+                  <i class="fa-solid fa-lock"></i>
+
+                  <input
+                    type="password"
+                    id="passwordRegistro"
+                    placeholder="Crea una contraseña"
+                    required
+                  />
+
+                  <button
+                    type="button"
+                    class="mostrar-password"
+                    onclick="mostrarPassword('passwordRegistro', this)"
+                  >
+                    <i class="fa-regular fa-eye"></i>
+                  </button>
+                </div>
+              </div>
+
+              <button type="submit" class="btn-principal">
+                Crear cuenta
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </form>
+
+            <div class="separador">
+              <span>o</span>
+            </div>
+
+            <p class="cambiar-formulario">
+              ¿Ya tienes una cuenta?
+
+              <button type="button" onclick="mostrarLogin()">Ingresar</button>
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="login.js"></script>
+  </body>
+</html>
