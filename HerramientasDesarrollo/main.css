@@ -117,18 +117,19 @@
   padding: 90px 0;
 }
 
-.seccion-alt {
+.seccion.alt {
   background: #0d1426;
 }
 
-.contenedor {
+.cont {
   max-width: 1300px;
   margin: auto;
   padding: 0 40px;
 }
 
-.seccion-hero {
+.hero {
   padding: 100px 0 90px;
+  text-align: center;
 }
 
 .seccion h1 {
@@ -139,22 +140,23 @@
   margin: 0 0 24px;
 }
 
-.hero-texto {
+.hero-p {
   color: #ffffff70;
   font-size: 18px;
   line-height: 1.7;
   max-width: 620px;
-  margin: 0 0 36px;
+  margin: 0 auto 36px;
 }
 
-.hero-botones {
+.botones {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
-.btn-primario,
-.btn-secundario {
+.btn-azul,
+.btn-borde {
   display: inline-block;
   padding: 12px 28px;
   border-radius: 6px;
@@ -164,27 +166,30 @@
   transition: all 0.3s;
 }
 
-.btn-primario {
+.btn-azul {
   background: #2563eb;
   color: white;
   border: 1px solid #2563eb;
 }
 
-.btn-primario:hover {
+.btn-azul:hover {
   background: #1a4fd8;
   border-color: #1a4fd8;
   color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px #2563eb50;
 }
 
-.btn-secundario {
+.btn-borde {
   background: transparent;
   color: white;
   border: 1px solid white;
 }
 
-.btn-secundario:hover {
+.btn-borde:hover {
   background: white;
   color: #0a0f1e;
+  transform: translateY(-3px);
 }
 
 .seccion a:focus-visible {
@@ -192,65 +197,92 @@
   outline-offset: 3px;
 }
 
-.encabezado-seccion {
+.cabecera {
+  text-align: center;
   margin-bottom: 48px;
 }
 
-.seccion h2.titulo-seccion {
+.seccion h2.titulo {
   font-size: 36px;
   font-weight: 700;
   line-height: 1.2;
   margin: 0 0 16px;
 }
 
-.subtitulo {
+.cabecera .titulo:last-child {
+  margin-bottom: 0;
+}
+
+.sub {
   color: #ffffff70;
   font-size: 16px;
   line-height: 1.7;
   max-width: 680px;
-  margin: 0;
+  margin: 0 auto;
 }
 
-.subtitulo-bloque {
+.grupo {
+  margin-top: 56px;
+}
+
+.grupo-grande {
+  margin-top: 80px;
+}
+
+.mini {
   font-size: 16px;
   font-weight: 600;
+  text-align: center;
   color: white;
-  margin: 48px 0 16px;
+  margin: 0 0 20px;
 }
 
-.recuadro {
+.tarjeta {
   background: #ffffff08;
   border: 1px solid #ffffff20;
   border-radius: 12px;
   padding: 32px;
+  transition: transform 0.3s ease, border-color 0.3s ease,
+    background 0.3s ease, box-shadow 0.3s ease;
 }
 
-.recuadro-principal {
+.tarjeta:hover {
+  transform: translateY(-6px);
+  border-color: #2563eb;
+  background: #2563eb15;
+  box-shadow: 0 14px 32px #2563eb30;
+}
+
+.destacada {
   background: #2563eb20;
   border-color: #2563eb;
 }
 
-.recuadro h3 {
+.destacada:hover {
+  background: #2563eb30;
+}
+
+.tarjeta h3 {
   font-size: 22px;
   font-weight: 600;
   margin: 0 0 10px;
 }
 
-.recuadro > p {
+.tarjeta > p {
   color: #ffffff70;
   font-size: 14px;
   line-height: 1.7;
   margin: 0;
 }
 
-.azor-grid {
+.azor {
   display: grid;
   grid-template-columns: 1.3fr 1fr 1fr;
   gap: 24px;
   align-items: start;
 }
 
-.lista-puntos {
+.puntos {
   list-style: none;
   padding: 0;
   margin: 20px 0 0;
@@ -259,7 +291,7 @@
   gap: 12px;
 }
 
-.lista-puntos li {
+.puntos li {
   position: relative;
   padding-left: 20px;
   color: #ffffff70;
@@ -267,7 +299,7 @@
   line-height: 1.6;
 }
 
-.lista-puntos li::before {
+.puntos li::before {
   content: "";
   position: absolute;
   left: 0;
@@ -278,17 +310,10 @@
   background: #2563eb;
 }
 
-.bloque-chips {
-  margin-top: 56px;
-}
-
-.bloque-chips .subtitulo-bloque {
-  margin-top: 0;
-}
-
 .chips {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 10px;
 }
 
@@ -299,22 +324,37 @@
   font-weight: 500;
   padding: 8px 18px;
   border-radius: 50px;
+  border: 1px solid transparent;
+  cursor: default;
+  transition: transform 0.3s ease, background 0.3s ease,
+    border-color 0.3s ease, color 0.3s ease;
 }
 
-.chip-suave {
+.chip:hover {
+  background: #2563eb;
+  transform: translateY(-3px);
+}
+
+.chip-gris {
   background: transparent;
-  border: 1px solid #ffffff20;
+  border-color: #ffffff20;
   color: #ffffff70;
 }
 
-.dos-columnas {
+.chip-gris:hover {
+  background: transparent;
+  border-color: #2563eb;
+  color: white;
+}
+
+.dos-col {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
   gap: 80px;
   align-items: start;
 }
 
-.texto-historia p {
+.historia p {
   color: #ffffff70;
   font-size: 16px;
   line-height: 1.8;
@@ -322,63 +362,75 @@
   margin: 0 0 18px;
 }
 
-.texto-historia strong {
+.historia strong {
   color: white;
   font-weight: 600;
 }
 
-.estadisticas {
+.cifras {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 0 40px;
 }
 
-.estadistica {
+.cifra {
   padding: 28px 0;
   border-top: 1px solid #ffffff20;
+  transition: border-color 0.3s ease;
 }
 
-.estadistica strong {
+.cifra:hover {
+  border-top-color: #2563eb;
+}
+
+.cifra strong {
   display: block;
   font-size: 44px;
   font-weight: 700;
   line-height: 1;
   margin-bottom: 12px;
+  transition: color 0.3s ease;
 }
 
-.estadistica span {
+.cifra:hover strong {
+  color: #2563eb;
+}
+
+.cifra span {
   color: #ffffff70;
   font-size: 13px;
   line-height: 1.6;
 }
 
-.mision-vision {
+.mv {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 48px;
 }
 
-.bloque-texto {
+.mv-item {
   border-left: 3px solid #2563eb;
-  padding-left: 28px;
+  padding: 8px 0 8px 28px;
+  transition: transform 0.3s ease, background 0.3s ease;
 }
 
-.bloque-texto h3 {
+.mv-item:hover {
+  transform: translateX(8px);
+  background: #ffffff08;
+}
+
+.mv-item h3 {
   font-size: 24px;
   font-weight: 600;
   margin: 0 0 12px;
 }
 
-.bloque-texto p {
+.mv-item p {
   color: #ffffff70;
   font-size: 15px;
   line-height: 1.8;
   max-width: 560px;
   margin: 0;
-}
-
-.bloque-valores {
-  margin-top: 72px;
 }
 
 .valores {
@@ -390,6 +442,13 @@
 .valor {
   border-top: 1px solid #ffffff20;
   padding-top: 20px;
+  text-align: center;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.valor:hover {
+  transform: translateY(-5px);
+  border-top-color: #2563eb;
 }
 
 .valor h4 {
@@ -402,7 +461,8 @@
   color: #ffffff70;
   font-size: 14px;
   line-height: 1.7;
-  margin: 0;
+  margin: 0 auto;
+  max-width: 320px;
 }
 
 .filas {
@@ -413,8 +473,14 @@
   display: grid;
   grid-template-columns: 300px 1fr;
   gap: 40px;
-  padding: 32px 0;
+  padding: 32px 20px;
   border-bottom: 1px solid #ffffff20;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.fila:hover {
+  background: #ffffff08;
+  border-bottom-color: #2563eb;
 }
 
 .fila h3 {
@@ -439,30 +505,37 @@
 
 .paso {
   position: relative;
+  text-align: center;
 }
 
 .paso:not(:last-child)::after {
   content: "";
   position: absolute;
   top: 22px;
-  left: 64px;
-  right: -20px;
+  left: calc(50% + 32px);
+  width: calc(100% - 24px);
   height: 1px;
   background: #ffffff20;
 }
 
-.paso-numero {
+.paso-num {
   width: 44px;
   height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 0 auto 22px;
   border: 2px solid #2563eb;
   border-radius: 50%;
   background: #2563eb30;
   font-size: 16px;
   font-weight: 700;
-  margin-bottom: 22px;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.paso:hover .paso-num {
+  background: #2563eb;
+  transform: scale(1.15);
 }
 
 .paso h3 {
@@ -475,35 +548,92 @@
   color: #ffffff70;
   font-size: 14px;
   line-height: 1.7;
-  margin: 0;
+  margin: 0 auto;
+  max-width: 340px;
 }
 
-.nota-socios {
+.socios {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 20px;
+}
+
+.socio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 24px 16px;
+  background: #ffffff08;
+  border: 1px solid #ffffff20;
+  border-radius: 12px;
+  color: #ffffff70;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: transform 0.3s ease, border-color 0.3s ease,
+    box-shadow 0.3s ease, color 0.3s ease;
+}
+
+.socio:hover {
+  transform: translateY(-6px);
+  border-color: #2563eb;
+  box-shadow: 0 14px 32px #2563eb30;
+  color: white;
+}
+
+.socio-logo {
+  width: 100%;
+  height: 76px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border-radius: 8px;
+}
+
+.socio-logo img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  font-size: 11px;
+  color: #6b7280;
+  transition: transform 0.3s ease;
+}
+
+.socio:hover .socio-logo img {
+  transform: scale(1.08);
+}
+
+.nota {
   color: #ffffff70;
   font-size: 14px;
   line-height: 1.7;
+  text-align: center;
   max-width: 680px;
-  margin: 18px 0 0;
+  margin: 28px auto 0;
 }
 
-.certificaciones {
+.certs {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
 
-.certificaciones .recuadro {
+.certs .tarjeta {
   padding: 24px;
+  text-align: center;
 }
 
-.certificaciones strong {
+.certs strong {
   display: block;
   font-size: 20px;
   font-weight: 700;
   margin-bottom: 6px;
 }
 
-.certificaciones span {
+.certs span {
   color: #ffffff70;
   font-size: 13px;
 }
@@ -532,17 +662,53 @@
   margin: 0 auto 32px;
 }
 
-.cta-botones {
-  justify-content: center;
-}
-
-.cta .cta-direccion {
+.cta .cta-dir {
   font-size: 13px;
   margin: 28px auto 0;
 }
 
+@keyframes subir {
+  from {
+    opacity: 0;
+    translate: 0 28px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  .aparece {
+    animation: subir linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 35%;
+  }
+}
+
+@supports not (animation-timeline: view()) {
+  .aparece {
+    animation: subir 0.7s ease both;
+    animation-delay: calc(var(--i, 0) * 90ms);
+  }
+
+  .aparece:nth-child(2) { --i: 1; }
+  .aparece:nth-child(3) { --i: 2; }
+  .aparece:nth-child(4) { --i: 3; }
+  .aparece:nth-child(5) { --i: 4; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .seccion *,
+  .seccion *::before,
+  .seccion *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
 @media (max-width: 992px) {
-  .contenedor {
+  .cont {
     padding: 0 24px;
   }
 
@@ -554,21 +720,21 @@
     font-size: 40px;
   }
 
-  .seccion h2.titulo-seccion,
+  .seccion h2.titulo,
   .cta h2 {
     font-size: 28px;
   }
 
-  .azor-grid,
-  .dos-columnas,
-  .mision-vision,
+  .azor,
+  .dos-col,
+  .mv,
   .valores,
   .pasos,
-  .certificaciones {
+  .certs {
     grid-template-columns: 1fr;
   }
 
-  .dos-columnas {
+  .dos-col {
     gap: 48px;
   }
 
