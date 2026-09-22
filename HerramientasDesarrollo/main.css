@@ -121,6 +121,7 @@
 
 .texto-carousel {
   position: absolute;
+  font-family: "Inter", sans-serif;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -133,12 +134,14 @@
 
 .texto-carousel h1 {
   font-size: 48px;
+  font-family: "Inter", sans-serif;
   margin: 0 0 20px 0;
   text-align: center;
 }
 
 .texto-carousel p {
   font-size: 20px;
+  font-family: "Inter", sans-serif;
   line-height: 1.6;
   margin: 0 auto;
   text-align: center;
@@ -445,6 +448,17 @@
   line-height: 1.6;
 }
 
+.imagen-historia {
+  width: 80%;
+  margin: 60px auto 0;
+}
+
+.imagen-historia img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+}
 .mv {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
