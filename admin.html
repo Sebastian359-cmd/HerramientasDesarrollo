@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SGT · Administración web</title>
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="logo">CFBD</span>
+        <div><strong>SGT</strong><small>Gestión de tickets</small></div>
+      </div>
+      <p class="nav-title">Contenido de la web</p>
+      <nav id="nav"></nav>
+    </aside>
+ 
+    <div class="main">
+      <header class="topbar">
+        <div class="user">
+          <span class="avatar">VA</span>
+          <div><strong>Victor</strong><small>Administrador</small></div>
+        </div>
+      </header>
+      <section class="content" id="vista"></section>
+    </div>
+  </div>
+ 
+  <div id="modal-root"></div>
+  <div id="toast" class="toast" role="status"></div>
+  <script src="admin.js"></script>
+</body>
+</html>
