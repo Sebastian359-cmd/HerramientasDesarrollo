@@ -203,6 +203,64 @@
         </div>
     </footer>
 
+    <!-- ================= MODAL PRODUCTO ESPECÍFICO (JUNIET) ================= -->
+<div class="modal fade" id="modalProductoEspecifico" tabindex="-1" aria-labelledby="modalProductoTitulo" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content borde-suave">
+      <div class="modal-header border-0 pb-0">
+        <span id="modal-categoria" class="badge-cat-modal">Categoría</span>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+
+      <div class="modal-body pt-2 pb-4 px-4">
+        <div id="modal-cargando" class="text-center py-5">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Cargando...</span>
+          </div>
+          <p class="mt-2 text-muted">Consultando detalles...</p>
+        </div>
+
+        <div id="modal-error" class="alert alert-danger" style="display: none;"></div>
+
+        <div id="modal-detalle-contenido" class="modal-grid-detalle" style="display: none;">
+          <!-- Bloque Imagen -->
+          <div class="modal-img-wrapper">
+            <img id="modal-img" src="" alt="Producto" />
+          </div>
+
+          <!-- Bloque Info -->
+          <div class="modal-info-wrapper">
+            <h2 id="modal-producto-nombre" class="modal-titulo"></h2>
+            <div id="modal-precio" class="modal-precio"></div>
+            <p id="modal-stock" class="modal-stock-txt"></p>
+            <p id="modal-descripcion" class="modal-descripcion-txt"></p>
+
+            <hr class="my-3" />
+
+            <!-- Selector de Cantidad para posterior compra -->
+            <div class="modal-compra-bloque">
+              <label class="fw-semibold mb-2">Cantidad para compra:</label>
+              <div class="grupo-contador-modal">
+                <button type="button" id="modal-btn-menos" class="btn-step-modal">-</button>
+                <span id="modal-display-cantidad" class="step-num">1</span>
+                <button type="button" id="modal-btn-mas" class="btn-step-modal">+</button>
+              </div>
+              <span id="modal-subtotal" class="modal-subtotal-txt">Subtotal: S/. 0.00</span>
+            </div>
+
+            <button type="button" id="modal-btn-confirmar" class="btn-modal-comprar mt-3">
+              Añadir a la orden
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<link rel="stylesheet" href="producto-modal.css" />
+<script src="producto-modal.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
