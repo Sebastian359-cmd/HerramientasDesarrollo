@@ -1,0 +1,137 @@
+.borde-suave {
+    border-radius: 14px;
+    border: none;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+}
+
+.badge-cat-modal {
+    background-color: #e0f2fe;
+    color: #0369a1;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 0.35rem 0.75rem;
+    border-radius: 6px;
+    text-transform: uppercase;
+}
+
+.modal-grid-detalle {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 1.75rem;
+    align-items: start;
+}
+
+.modal-img-wrapper {
+    background-color: #f8fafc;
+    border-radius: 10px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 280px;
+    border: 1px solid #e2e8f0;
+}
+
+.modal-img-wrapper img {
+    max-width: 100%;
+    max-height: 260px;
+    object-fit: contain; /* Garantiza que la imagen no se deforme */
+    display: block;
+}
+
+.modal-info-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-titulo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-top: 0.25rem;
+    margin-bottom: 0.4rem;
+}
+
+.modal-precio {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #2563eb;
+    margin-bottom: 0.25rem;
+}
+
+.modal-stock-txt {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #16a34a;
+    margin-bottom: 0.75rem;
+}
+
+.modal-descripcion-txt {
+    font-size: 0.95rem;
+    color: #475569;
+    line-height: 1.5;
+}
+
+.grupo-contador-modal {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    background: #ffffff;
+    overflow: hidden;
+}
+
+.btn-step-modal {
+    width: 38px;
+    height: 38px;
+    border: none;
+    background: #f1f5f9;
+    font-weight: bold;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.btn-step-modal:hover:not(:disabled) {
+    background: #e2e8f0;
+}
+
+.btn-step-modal:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.step-num {
+    min-width: 44px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.modal-subtotal-txt {
+    display: block;
+    margin-top: 0.4rem;
+    font-size: 0.85rem;
+    color: #64748b;
+}
+
+.btn-modal-comprar {
+    background-color: #2563eb;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 1.25rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.btn-modal-comprar:hover {
+    background-color: #1d4ed8;
+}
+
+@media (max-width: 768px) {
+    .modal-grid-detalle {
+        grid-template-columns: 1fr;
+    }
+}
