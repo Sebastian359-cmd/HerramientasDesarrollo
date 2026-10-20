@@ -1,148 +1,266 @@
-// URL base de los endpoints documentados en Swagger
-const API_SWAGGER_PRODUCTOS = 'http://localhost:8080/api/productos';
+const API_PUBLICA_PRODUCTOS =
+    "https://sgt.azorweb.dev/api/public/web/productos";
 
-// Fallback con mock de prueba por si el backend aún no está encendido
-const PRODUCTOS_BACKUP = [
-    {
-        id: 1,
-        nombre: 'Servidor Rack 2U',
-        categoria: 'Servidores',
-        precio: 5200,
-        imagen: 'img/p1.jpg',
-        descripcion: 'Servidor de alta densidad diseñado para cargas de trabajo críticas y virtualización continua.',
-        stock: 12
-    },
-    {
-        id: 2,
-        nombre: 'Cámara IA 4K',
-        categoria: 'Video',
-        precio: 800,
-        imagen: 'img/p2.jpg',
-        descripcion: 'Cámara inteligente con reconocimiento facial y conteo de personas en tiempo real.',
-        stock: 20
-    },
-    {
-        id: 3,
-        nombre: 'Switch 24 puertos',
-        categoria: 'Redes',
-        precio: 450,
-        imagen: 'img/p3.jpg',
-        descripcion: 'Switch gestionable Gigabit de capa 2/3 con soporte PoE+ para equipos empresariales.',
-        stock: 15
-    }
-];
+const API_PUBLICA_SERVICIOS =
+    "https://sgt.azorweb.dev/api/public/web/servicios";
 
 let productoModalActual = null;
 let cantidadModal = 1;
 let modalBootstrapInstance = null;
 
-// Inicializa el modal de Bootstrap
-document.addEventListener('DOMContentLoaded', () => {
-    const modalEl = document.getElementById('modalProductoEspecifico');
-    if (modalEl && window.bootstrap) {
-        modalBootstrapInstance = new bootstrap.Modal(modalEl);
+// Convierte una ruta de imagen relativa en una URL completa.
+function resolverImagenModal(producto) {
+    const imagen = producto.url_img || producto.imagen;
+
+    if (!imagen) return "";
+
+    if (/^(https?:|data:|blob:)/i.test(imagen)) {
+        return imagen;
     }
 
-    // Configurar listeners de incremento / decremento
-    document.getElementById('modal-btn-menos')?.addEventListener('click', () => {
+    return "https://sgt.azorweb.dev" +
+        (imagen.startsWith("/") ? "" : "/") +
+        imagen;
+}
+
+// Obtiene el valor de un campo aunque tenga distintos nombres.
+function obtenerCampo(objeto, nombres) {
+    for (const nombre of nombres) {
+        if (objeto[nombre] !== undefined &&
+            objeto[nombre] !== null &&
+            objeto[nombre] !== "") {
+            return objeto[nombre];
+        }
+    }
+
+    return null;
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const modalEl = document.getElementById("modalProductoEspecifico");
+
+    if (modalEl && window.bootstrap) {
+        modalBootstrapInstance = new bootstrap.Modal(modalEl);
+    } else if (modalEl) {
+        console.error(
+            "No se pudo inicializar el modal. Comprueba que Bootstrap JS esté cargado."
+        );
+    }
+
+    document.getElementById("modal-btn-menos")?.addEventListener("click", () => {
         if (cantidadModal > 1) {
             cantidadModal--;
             actualizarContadorModal();
         }
     });
 
-    document.getElementById('modal-btn-mas')?.addEventListener('click', () => {
-        const max = productoModalActual?.stock ?? 99;
+    document.getElementById("modal-btn-mas")?.addEventListener("click", () => {
+        const stock = obtenerCampo(productoModalActual || {}, [
+            "stock",
+            "cantidad_stock",
+            "existencias"
+        ]);
+
+        // Si la API no informa stock, no se inventa un límite.
+        const max = stock === null ? 99 : Number(stock);
+
         if (cantidadModal < max) {
             cantidadModal++;
             actualizarContadorModal();
         }
     });
 
-    document.getElementById('modal-btn-confirmar')?.addEventListener('click', () => {
+    document.getElementById("modal-btn-confirmar")?.addEventListener("click", () => {
         if (!productoModalActual) return;
-        const subtotal = productoModalActual.precio * cantidadModal;
-        alert(`Añadido:\n${cantidadModal}x ${productoModalActual.nombre}\nTotal: S/. ${subtotal.toFixed(2)}`);
+
+        const precio = obtenerCampo(productoModalActual, [
+            "precio",
+            "precio_venta",
+            "precioVenta"
+        ]);
+
+        if (precio === null || !Number.isFinite(Number(precio))) {
+            alert("Este producto no tiene un precio disponible en la API.");
+            return;
+        }
+
+        const subtotal = Number(precio) * cantidadModal;
+
+        alert(
+            `Seleccionaste:\n${cantidadModal} x ${productoModalActual.nombre}\n` +
+            `Subtotal: S/ ${subtotal.toFixed(2)}`
+        );
+
         modalBootstrapInstance?.hide();
     });
 });
 
 /**
- * Función principal que llama la tarjeta al hacer clic
- * @param {number|string} idProducto 
+ * Abre el modal y busca el producto real en la API pública.
+ * @param {number|string} idProducto
  */
-async function abrirDetalleProducto(idProducto) {
+
+async function abrirDetalleProducto(idElemento, tipo = "producto") {
     cantidadModal = 1;
-    const loader = document.getElementById('modal-cargando');
-    const errorBox = document.getElementById('modal-error');
-    const contenido = document.getElementById('modal-detalle-contenido');
 
-    loader.style.display = 'block';
-    errorBox.style.display = 'none';
-    contenido.style.display = 'none';
+    const loader = document.getElementById("modal-cargando");
+    const errorBox = document.getElementById("modal-error");
+    const contenido = document.getElementById("modal-detalle-contenido");
 
-    // Abrir ventana modal
+    if (!loader || !errorBox || !contenido) {
+        console.error("Faltan elementos HTML necesarios para el modal.");
+        return;
+    }
+
+    loader.style.display = "block";
+    errorBox.style.display = "none";
+    contenido.style.display = "none";
+
     modalBootstrapInstance?.show();
 
     try {
         productoModalActual = null;
 
-        // 1. Intentar consultar endpoint de Swagger
-        try {
-            const res = await fetch(`${API_SWAGGER_PRODUCTOS}/${idProducto}`);
-            if (res.ok) {
-                productoModalActual = await res.json();
-            }
-        } catch (e) {
-            console.warn('API Swagger no alcanzable, usando datos de respaldo.');
+        const api = tipo === "servicio"
+            ? API_PUBLICA_SERVICIOS
+            : API_PUBLICA_PRODUCTOS;
+
+        const respuesta = await fetch(api);
+
+        if (!respuesta.ok) {
+            throw new Error(`Error HTTP ${respuesta.status} al consultar ${api}`);
         }
 
-        // 2. Si no responde el backend, buscar en el mock local
+        const datos = await respuesta.json();
+
+        const elementos = Array.isArray(datos)
+            ? datos
+            : datos.productos || datos.servicios || datos.data || datos.content || [];
+
+        if (!Array.isArray(elementos)) {
+            throw new Error("La API no devolvió una lista válida.");
+        }
+
+        productoModalActual = elementos.find(
+            elemento => String(elemento.id) === String(idElemento)
+        );
+
         if (!productoModalActual) {
-            productoModalActual = PRODUCTOS_BACKUP.find(p => p.id == idProducto) || PRODUCTOS_BACKUP[0];
+            throw new Error(
+                `No se encontró el ${tipo} con ID ${idElemento}.`
+            );
         }
 
-        if (!productoModalActual) {
-            throw new Error('No se pudo cargar la información del producto.');
+        const elemento = productoModalActual;
+
+        const nombre = elemento.nombre || elemento.nombre_servicio || "Sin nombre";
+
+        const categoria = obtenerCampo(elemento, [
+            "categoria",
+            "tipo_evento",
+            "tipo",
+            "tipo_producto"
+        ]);
+
+        const descripcion = obtenerCampo(elemento, [
+            "descripcion",
+            "descripcion_corta",
+            "descripcion_larga"
+        ]);
+
+        const precio = obtenerCampo(elemento, [
+            "precio",
+            "precio_venta",
+            "precioVenta"
+        ]);
+
+        const stock = obtenerCampo(elemento, [
+            "stock",
+            "cantidad_stock",
+            "existencias"
+        ]);
+
+        document.getElementById("modal-producto-nombre").textContent = nombre;
+
+        document.getElementById("modal-categoria").textContent =
+            categoria || (tipo === "servicio" ? "Servicio" : "Producto");
+
+        document.getElementById("modal-descripcion").textContent =
+            descripcion || "Sin descripción disponible.";
+
+        document.getElementById("modal-precio").textContent =
+            precio !== null && Number.isFinite(Number(precio))
+                ? `S/ ${Number(precio).toFixed(2)}`
+                : "Precio no disponible";
+
+        document.getElementById("modal-stock").textContent =
+            stock !== null
+                ? `Stock disponible: ${stock} unidades`
+                : "Stock no disponible";
+
+        const img = document.getElementById("modal-img");
+        const urlImagen = resolverImagenModal(elemento);
+
+        img.alt = nombre;
+
+        if (urlImagen) {
+            img.src = urlImagen;
+            img.style.display = "";
+            img.onerror = () => {
+                img.onerror = null;
+                img.removeAttribute("src");
+                img.style.display = "none";
+            };
+        } else {
+            img.removeAttribute("src");
+            img.style.display = "none";
         }
-
-        // 3. Renderizar campos
-        document.getElementById('modal-producto-nombre').textContent = productoModalActual.nombre;
-        document.getElementById('modal-categoria').textContent = productoModalActual.categoria || 'Producto';
-        document.getElementById('modal-precio').textContent = `S/. ${Number(productoModalActual.precio).toFixed(2)}`;
-        document.getElementById('modal-descripcion').textContent = productoModalActual.descripcion || 'Sin descripción disponible.';
-        
-        const stock = productoModalActual.stock ?? 10;
-        document.getElementById('modal-stock').textContent = `Stock disponible: ${stock} unidades`;
-
-        const img = document.getElementById('modal-img');
-        img.src = productoModalActual.imagen || 'img/p1.jpg';
-        img.alt = productoModalActual.nombre;
 
         actualizarContadorModal();
 
-        loader.style.display = 'none';
-        contenido.style.display = 'grid';
+        loader.style.display = "none";
+        contenido.style.display = "grid";
 
-    } catch (err) {
-        loader.style.display = 'none';
-        errorBox.textContent = err.message;
-        errorBox.style.display = 'block';
+    } catch (error) {
+        console.error("Error al cargar el detalle:", error);
+
+        loader.style.display = "none";
+        contenido.style.display = "none";
+        errorBox.textContent = error.message;
+        errorBox.style.display = "block";
     }
 }
 
 function actualizarContadorModal() {
-    const display = document.getElementById('modal-display-cantidad');
-    const btnMenos = document.getElementById('modal-btn-menos');
-    const btnMas = document.getElementById('modal-btn-mas');
-    const txtSubtotal = document.getElementById('modal-subtotal');
+    const display = document.getElementById("modal-display-cantidad");
+    const btnMenos = document.getElementById("modal-btn-menos");
+    const btnMas = document.getElementById("modal-btn-mas");
+    const txtSubtotal = document.getElementById("modal-subtotal");
+
+    if (!display || !btnMenos || !btnMas || !txtSubtotal) return;
+
+    const stock = obtenerCampo(productoModalActual || {}, [
+        "stock",
+        "cantidad_stock",
+        "existencias"
+    ]);
+
+    const precio = obtenerCampo(productoModalActual || {}, [
+        "precio",
+        "precio_venta",
+        "precioVenta"
+    ]);
 
     display.textContent = cantidadModal;
     btnMenos.disabled = cantidadModal <= 1;
-    btnMas.disabled = cantidadModal >= (productoModalActual?.stock ?? 99);
 
-    if (productoModalActual) {
-        const sub = productoModalActual.precio * cantidadModal;
-        txtSubtotal.textContent = `Subtotal: S/. ${sub.toFixed(2)}`;
+    const max = stock === null ? 99 : Number(stock);
+    btnMas.disabled = cantidadModal >= max;
+
+    if (precio !== null && Number.isFinite(Number(precio))) {
+        const subtotal = Number(precio) * cantidadModal;
+        txtSubtotal.textContent = `Subtotal: S/ ${subtotal.toFixed(2)}`;
+    } else {
+        txtSubtotal.textContent = "Subtotal no disponible";
     }
 }

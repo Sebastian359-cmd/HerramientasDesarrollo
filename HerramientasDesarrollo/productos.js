@@ -1,5 +1,4 @@
 const API_BASE = "https://sgt.azorweb.dev";
-const DETALLE_URL = "producto-especifico.html"; 
 
 const TIPOS = {
   producto: { nombre: "Productos", etiqueta: "Producto", dot: "prod" },
@@ -12,12 +11,12 @@ const IMAGEN_VACIA =
     '<svg xmlns="http://www.w3.org/2000/svg" width="400" height="260">' +
       '<rect width="100%" height="100%" fill="#111827"/>' +
       '<text x="50%" y="50%" fill="#4a5a78" font-family="Arial" font-size="18" ' +
-      'text-anchor="middle" dominant-baseline="middle">Sin imagen</text></svg>'
+      'text-anchor="middle" dominant-baseline="middle">Sin imagen</text></svg>',
   );
 
 const estado = {
-  items: [], 
-  categoria: "all", 
+  items: [],
+  categoria: "all",
 };
 
 const dom = {
@@ -67,7 +66,9 @@ function obtenerItemsVisibles() {
   const texto = dom.busqueda.value.trim().toLowerCase();
 
   return estado.items
-    .filter((item) => coincideConBusqueda(item, texto) && coincideConCategoria(item))
+    .filter(
+      (item) => coincideConBusqueda(item, texto) && coincideConCategoria(item),
+    )
     .sort(ORDENAMIENTOS[dom.orden.value]);
 }
 function escaparHTML(texto) {
@@ -84,9 +85,12 @@ function resolverImagen(item) {
 
 function crearTarjeta(item) {
   const tipo = TIPOS[item.tipo];
-  const etiqueta = item.destacado ? `${tipo.etiqueta} · Destacado` : tipo.etiqueta;
-  const descripcion = item.descripcion_corta || item.descripcion || "Sin descripción disponible.";
-  const enlace = `${DETALLE_URL}?tipo=${item.tipo}&slug=${encodeURIComponent(item.slug)}`;
+  const etiqueta = item.destacado
+    ? `${tipo.etiqueta} · Destacado`
+    : tipo.etiqueta;
+
+  const descripcion =
+    item.descripcion_corta || item.descripcion || "Sin descripción disponible.";
 
   const caracteristicas = (item.caracteristicas || [])
     .slice(0, 3)
@@ -94,19 +98,41 @@ function crearTarjeta(item) {
     .join("");
 
   return `
-    <article class="prod-card">
-      <div class="prod-img">
-        <img src="${escaparHTML(resolverImagen(item))}" alt="${escaparHTML(item.nombre)}" loading="lazy" />
-      </div>
-      <div class="prod-body">
-        <span class="prod-codigo">${etiqueta}</span>
-        <h3>${escaparHTML(item.nombre)}</h3>
-        ${item.subtitulo ? `<small class="prod-ubicacion">${escaparHTML(item.subtitulo)}</small>` : ""}
-        <p>${escaparHTML(descripcion)}</p>
-        <div class="prod-chips">${caracteristicas}</div>
-        <a class="prod-btn" href="${enlace}">Ver detalle</a>
-      </div>
-    </article>`;
+        <article class="prod-card">
+            <div class="prod-img">
+                <img
+                    src="${escaparHTML(resolverImagen(item))}"
+                    alt="${escaparHTML(item.nombre)}"
+                    loading="lazy"
+                />
+            </div>
+
+            <div class="prod-body">
+                <span class="prod-codigo">${escaparHTML(etiqueta)}</span>
+
+                <h3>${escaparHTML(item.nombre)}</h3>
+
+                ${
+                  item.subtitulo
+                    ? `<small class="prod-ubicacion">${escaparHTML(item.subtitulo)}</small>`
+                    : ""
+                }
+
+                <p>${escaparHTML(descripcion)}</p>
+
+                <div class="prod-chips">
+                    ${caracteristicas}
+                </div>
+
+                <button
+                    class="prod-btn"
+                    type="button"
+                    onclick="abrirDetalleProducto(${JSON.stringify(item.id)}, '${item.tipo}')">
+                    Ver detalle
+                </button>
+            </div>
+        </article>
+    `;
 }
 
 function mostrarMensaje(texto) {
@@ -117,7 +143,9 @@ function mostrarItems() {
   const visibles = obtenerItemsVisibles();
 
   if (visibles.length === 0) {
-    mostrarMensaje("No se encontraron productos ni servicios con esos filtros.");
+    mostrarMensaje(
+      "No se encontraron productos ni servicios con esos filtros.",
+    );
     return;
   }
 
@@ -126,16 +154,21 @@ function mostrarItems() {
     <div class="prod-grid">${visibles.map(crearTarjeta).join("")}</div>`;
 
   dom.contenedor.querySelectorAll(".prod-img img").forEach((img) => {
-    img.addEventListener("error", () => (img.src = IMAGEN_VACIA), { once: true });
+    img.addEventListener("error", () => (img.src = IMAGEN_VACIA), {
+      once: true,
+    });
   });
 }
 
 function mostrarCategorias() {
-  const botones = [{ id: "all", nombre: "Todos", dot: "all", cantidad: estado.items.length }];
+  const botones = [
+    { id: "all", nombre: "Todos", dot: "all", cantidad: estado.items.length },
+  ];
 
   for (const [id, tipo] of Object.entries(TIPOS)) {
     const cantidad = estado.items.filter((item) => item.tipo === id).length;
-    if (cantidad > 0) botones.push({ id, nombre: tipo.nombre, dot: tipo.dot, cantidad });
+    if (cantidad > 0)
+      botones.push({ id, nombre: tipo.nombre, dot: tipo.dot, cantidad });
   }
 
   dom.categorias.innerHTML = botones
@@ -145,13 +178,16 @@ function mostrarCategorias() {
         <span class="cat-dot ${b.dot}"></span>
         ${b.nombre}
         <span class="cat-count">${b.cantidad}</span>
-      </button>`
+      </button>`,
     )
     .join("");
 }
 
 function actualizarPantalla() {
-  dom.limpiarBusqueda.classList.toggle("visible", dom.busqueda.value.length > 0);
+  dom.limpiarBusqueda.classList.toggle(
+    "visible",
+    dom.busqueda.value.length > 0,
+  );
   mostrarCategorias();
   mostrarItems();
 }
@@ -186,7 +222,9 @@ async function iniciar() {
     actualizarPantalla();
   } catch (error) {
     console.error(error);
-    mostrarMensaje("No se pudieron cargar los productos. Revisa la consola (F12).");
+    mostrarMensaje(
+      "No se pudieron cargar los productos. Revisa la consola (F12).",
+    );
   }
 }
 
