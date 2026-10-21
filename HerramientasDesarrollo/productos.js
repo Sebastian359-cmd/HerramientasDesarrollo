@@ -120,10 +120,6 @@ function crearTarjeta(item) {
 
                 <p>${escaparHTML(descripcion)}</p>
 
-                <div class="prod-chips">
-                    ${caracteristicas}
-                </div>
-
                 <button
                     class="prod-btn"
                     type="button"
