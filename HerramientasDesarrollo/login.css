@@ -231,7 +231,7 @@ body {
   position: relative;
 }
 
-.input-con-icono > i:first-child {
+.input-con-icono>i:first-child {
   position: absolute;
 
   left: 16px;
@@ -489,4 +489,30 @@ body {
     align-items: flex-start;
     gap: 12px;
   }
+}
+
+
+.btn-admin {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+
+  padding: 12px 20px;
+  background-color: #0a0f1e;
+  color: #ffffff;
+
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-admin:hover {
+  background-color: #1c2945;
+  color: #ffffff;
+  transform: translateY(-3px);
 }

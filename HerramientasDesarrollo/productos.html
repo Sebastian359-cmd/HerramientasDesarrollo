@@ -1,206 +1,318 @@
-<!DOCTYPE html>
-<html lang="es">
+<!doctype html>
 
-<head>
+<html lang="es">
+  <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>CFBD | Ingeniería &amp; desarrollo</title>
     <link rel="icon" href="img/productos.png" type="image/png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" href="productos.css" />
-</head>
+    <link rel="stylesheet" href="productos-modal.css" />
+    <link rel="stylesheet" href="producto-modal.css" />
+  </head>
 
-<body>
-
+  <body>
     <nav class="barra-navegacion">
-        <div class="nav-izquierda">
-            <div class="contenedor-logo">
-                <img src="img/LOGO CFBD.png" alt="Logo CFBD" />
-            </div>
+      <div class="nav-izquierda">
+        <div class="contenedor-logo">
+          <img src="img/LOGO CFBD.png" alt="Logo CFBD" />
         </div>
+      </div>
 
-        <div class="enlaces-nav">
-            <a href="index.html">Inicio</a>
-            <a href="productos.html">Productos (AZOR)</a>
-            <a href="#nosotros">Nosotros</a>
-            <a href="#clientes">Clientes</a>
-            <a href="#contacto">Contacto</a>
-        </div>
+      <div class="enlaces-nav">
+        <a href="index.html">Inicio</a>
+        <a href="productos.html">Productos (AZOR)</a>
+        <a href="#nosotros">Nosotros</a>
+        <a href="#clientes">Clientes</a>
+        <a href="#contacto">Contacto</a>
+      </div>
 
-        <div class="botones-nav">
-            <a href="login.html" class="btn-ingresar">Iniciar sesión</a>
-            <a href="login.html?registro=true" class="btn-registro">Registrarse</a>
-        </div>
+      <div class="botones-nav">
+        <a href="login.html" class="btn-ingresar">Iniciar sesión</a>
+        <a href="login.html?registro=true" class="btn-registro">Registrarse</a>
+      </div>
     </nav>
 
     <div id="inicio">
-        <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active" data-bs-interval="10000">
-                    <img src="img/p1.jpg" class="d-block w-100" alt="Productos" height="500px" />
-                </div>
-                <div class="carousel-item" data-bs-interval="10000">
-                    <img src="img/p2.jpg" class="d-block w-100" alt="Productos" height="500px" />
-                </div>
-                <div class="carousel-item" data-bs-interval="10000">
-                    <img src="img/p3.jpg" class="d-block w-100" alt="Productos" height="500px" />
-                </div>
-                <div class="carousel-item" data-bs-interval="10000">
-                    <img src="img/p4.jpg" class="d-block w-100" alt="Productos" height="500px" />
-                </div>
-                <div class="carousel-item" data-bs-interval="10000">
-                    <img src="img/p5.jpg" class="d-block w-100" alt="Productos" height="500px" />
-                </div>
-            </div>
-
-            <div class="texto-carousel">
-                <h1>Nuestros productos &amp; servicios</h1>
-                <p>
-                    Descubre nuestra amplia gama de productos y servicios diseñados para satisfacer tus necesidades
-                    tecnológicas. Desde soluciones innovadoras hasta servicios personalizados, estamos comprometidos
-                    en brindarte lo mejor en cada aspecto de tu experiencia con nosotros.
-                </p>
-            </div>
-
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
+      <div
+        id="carouselExampleInterval"
+        class="carousel slide"
+        data-bs-ride="carousel"
+      >
+        <div class="carousel-inner">
+          <div class="carousel-item active" data-bs-interval="10000">
+            <img
+              src="img/p1.jpg"
+              class="d-block w-100"
+              alt="Productos"
+              height="500"
+            />
+          </div>
+          <div class="carousel-item" data-bs-interval="10000">
+            <img
+              src="img/p2.jpg"
+              class="d-block w-100"
+              alt="Productos"
+              height="500"
+            />
+          </div>
+          <div class="carousel-item" data-bs-interval="10000">
+            <img
+              src="img/p3.jpg"
+              class="d-block w-100"
+              alt="Productos"
+              height="500"
+            />
+          </div>
+          <div class="carousel-item" data-bs-interval="10000">
+            <img
+              src="img/p4.jpg"
+              class="d-block w-100"
+              alt="Productos"
+              height="500"
+            />
+          </div>
+          <div class="carousel-item" data-bs-interval="10000">
+            <img
+              src="img/p5.jpg"
+              class="d-block w-100"
+              alt="Productos"
+              height="500"
+            />
+          </div>
         </div>
+
+        <div class="texto-carousel">
+          <h1>Nuestros productos &amp; servicios</h1>
+          <p>
+            Descubre nuestra amplia gama de productos y servicios diseñados para
+            satisfacer tus necesidades tecnológicas. Desde soluciones
+            innovadoras hasta servicios personalizados, estamos comprometidos en
+            brindarte lo mejor en cada aspecto de tu experiencia con nosotros.
+          </p>
+        </div>
+
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExampleInterval"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleInterval"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
     </div>
 
     <section class="contenido">
-        <div class="page">
+      <div class="page">
+        <aside class="sidebar">
+          <div class="sidebar-title">Filtros</div>
 
-            <aside class="sidebar">
-                <div class="sidebar-title">Filtros</div>
+          <div class="search-wrap">
+            <svg
+              width="14"
+              height="14"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <circle cx="11" cy="11" r="8" />
+              <path d="M21 21l-4.35-4.35" />
+            </svg>
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Buscar por nombre…"
+              autocomplete="off"
+            />
+            <button id="search-clear" aria-label="Limpiar">✕</button>
+          </div>
 
-                <div class="search-wrap">
-                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <circle cx="11" cy="11" r="8" />
-                        <path d="M21 21l-4.35-4.35" />
-                    </svg>
-                    <input type="text" id="search-input" placeholder="Buscar por nombre…" autocomplete="off">
-                    <button id="search-clear" aria-label="Limpiar">✕</button>
-                </div>
+          <label class="field-label" for="sort-select">Ordenar por</label>
+          <select id="sort-select">
+            <option value="default">Relevancia</option>
+            <option value="az">Nombre A → Z</option>
+            <option value="za">Nombre Z → A</option>
+          </select>
 
-                <label class="field-label" for="sort-select">Ordenar por</label>
-                <select id="sort-select">
-                    <option value="default">Relevancia</option>
-                    <option value="az">Nombre A → Z</option>
-                    <option value="za">Nombre Z → A</option>
-                </select>
+          <div class="filter-section">
+            <div class="filter-section-title">Categoría</div>
+            <div class="cat-list">
+              <button class="cat-btn active" data-cat="all">
+                <span class="cat-dot all"></span> Todos
+              </button>
+              <button class="cat-btn" data-cat="producto">
+                <span class="cat-dot prod"></span> Productos
+              </button>
+              <button class="cat-btn" data-cat="servicio">
+                <span class="cat-dot serv"></span> Servicios
+              </button>
+            </div>
+          </div>
 
-                <div class="filter-section">
-                    <div class="filter-section-title">Categoría</div>
-                    <div class="cat-list">
-                        <button class="cat-btn active" data-cat="all">
-                            <span class="cat-dot all"></span> Todos
-                        </button>
-                        <button class="cat-btn" data-cat="producto">
-                            <span class="cat-dot prod"></span> Productos
-                        </button>
-                        <button class="cat-btn" data-cat="servicio">
-                            <span class="cat-dot serv"></span> Servicios
-                        </button>
-                    </div>
-                </div>
+          <button class="reset-btn" id="reset-btn">Limpiar filtros</button>
+        </aside>
 
-                <button class="reset-btn" id="reset-btn">Limpiar filtros</button>
-            </aside>
-
-            <main class="content" id="product-container">
-                <!-- listado de productos y servicios -->
-            </main>
-
-        </div>
+        <main class="content" id="product-container"></main>
+      </div>
     </section>
 
     <footer class="footer">
-        <div class="footer-top">
-            <div class="footer-brand">
-                <img src="https://www.cfbd.co/imgs/CFBD_LOGO%20BLANCO.svg" alt="CFBD" />
-                <p>
-                    Transforma tu organización con infraestructura de servidores de alto
-                    rendimiento, analítica de video con IA y ecosistemas inteligentes.
-                </p>
-            </div>
-
-            <div class="footer-links">
-                <div>
-                    <h3>Compañía</h3>
-                    <a href="#nosotros">Nosotros</a>
-                    <a href="">Partners</a>
-                    <a href="">Brochures</a>
-                </div>
-                <div>
-                    <h3>Legal</h3>
-                    <a href="">Privacidad</a>
-                    <a href="">Términos</a>
-                </div>
-                <div>
-                    <h3>Contacto</h3>
-                    <span>Los Laureles 104 Ofc. 508</span>
-                    <span>Santiago de Surco 15039</span>
-                    <span>contacto@cfbd.co</span>
-                    <span>Carlos Barrientos - 962315045</span>
-                </div>
-            </div>
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img
+            src="https://www.cfbd.co/imgs/CFBD_LOGO%20BLANCO.svg"
+            alt="CFBD"
+          />
+          <p>
+            Transforma tu organización con infraestructura de servidores de alto
+            rendimiento, analítica de video con IA y ecosistemas inteligentes.
+          </p>
         </div>
 
-        <div class="footer-divider"></div>
+        <div class="footer-links">
+          <div>
+            <h3>Compañía</h3>
+            <a href="#nosotros">Nosotros</a>
+            <a href="">Partners</a>
+            <a href="">Brochures</a>
+          </div>
+          <div>
+            <h3>Legal</h3>
+            <a href="">Privacidad</a>
+            <a href="">Términos</a>
+          </div>
+          <div>
+            <h3>Contacto</h3>
+            <span>Los Laureles 104 Ofc. 508</span>
+            <span>Santiago de Surco 15039</span>
+            <span>contacto@cfbd.co</span>
+            <span>Carlos Barrientos - 962315045</span>
+          </div>
+        </div>
+      </div>
 
-        <div class="footer-middle">
-            <div class="footer-social">
-                <span>Síguenos</span>
-                <div class="social-icons">
-                    <a href="https://pe.linkedin.com/company/cfbd-sac" aria-label="LinkedIn" target="_blank">
-                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/linkedin.svg" alt="LinkedIn" />
-                    </a>
-                    <a href="https://www.facebook.com/" aria-label="Facebook" target="_blank">
-                        <img src="https://cdn.simpleicons.org/facebook/ffffff" alt="Facebook" />
-                    </a>
-                    <a href="https://www.instagram.com/" aria-label="Instagram" target="_blank">
-                        <img src="https://cdn.simpleicons.org/instagram/ffffff" alt="Instagram" />
-                    </a>
-                </div>
-            </div>
+      <div class="footer-divider"></div>
 
-            <div class="footer-socios">
-                <span>Rubros asociados</span>
-                <a href="https://www.hikvision.com/es-la/" target="_blank" aria-label="Hikvision">
-                    <img src="img/hiklogo.png" alt="Hikvision logo" width="100" height="100" />
-                </a>
-                <a href="https://get.avigilon.com/" target="_blank" aria-label="Avigilon">
-                    <img src="img/avigilon.png" alt="Avigilon logo" width="100" height="100" />
-                </a>
-                <a href="https://irisity.com/es/" target="_blank" aria-label="Irisity">
-                    <img src="img/iriscity.png" alt="Irisity logo" width="100" height="100" />
-                </a>
-            </div>
-
-            <div class="footer-utp">
-                <span>Proyecto académico</span>
-                <a href="https://www.utp.edu.pe/" target="_blank" aria-label="Universidad Tecnológica del Perú">
-                    <img src="https://s3.amazonaws.com/media.greatplacetowork.com/peru/best-workplaces-for-diversity-and-inclusion-in-peru/2024/utp/logo.jpg"
-                        alt="Universidad Tecnológica del Perú" />
-                </a>
-            </div>
+      <div class="footer-middle">
+        <div class="footer-social">
+          <span>Síguenos</span>
+          <div class="social-icons">
+            <a
+              href="https://pe.linkedin.com/company/cfbd-sac"
+              aria-label="LinkedIn"
+              target="_blank"
+            >
+              <img
+                src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/linkedin.svg"
+                alt="LinkedIn"
+              />
+            </a>
+            <a
+              href="https://www.facebook.com/"
+              aria-label="Facebook"
+              target="_blank"
+            >
+              <img
+                src="https://cdn.simpleicons.org/facebook/ffffff"
+                alt="Facebook"
+              />
+            </a>
+            <a
+              href="https://www.instagram.com/"
+              aria-label="Instagram"
+              target="_blank"
+            >
+              <img
+                src="https://cdn.simpleicons.org/instagram/ffffff"
+                alt="Instagram"
+              />
+            </a>
+          </div>
         </div>
 
-        <div class="footer-bottom">
-            <span>© 2026 CFBD. Todos los derechos reservados.</span>
+        <div class="footer-socios">
+          <span>Rubros asociados</span>
+          <a
+            href="https://www.hikvision.com/es-la/"
+            target="_blank"
+            aria-label="Hikvision"
+          >
+            <img
+              src="img/hiklogo.png"
+              alt="Hikvision logo"
+              width="100"
+              height="100"
+            />
+          </a>
+          <a
+            href="https://get.avigilon.com/"
+            target="_blank"
+            aria-label="Avigilon"
+          >
+            <img
+              src="img/avigilon.png"
+              alt="Avigilon logo"
+              width="100"
+              height="100"
+            />
+          </a>
+          <a
+            href="https://irisity.com/es/"
+            target="_blank"
+            aria-label="Irisity"
+          >
+            <img
+              src="img/iriscity.png"
+              alt="Irisity logo"
+              width="100"
+              height="100"
+            />
+          </a>
         </div>
+
+        <div class="footer-utp">
+          <span>Proyecto académico</span>
+          <a
+            href="https://www.utp.edu.pe/"
+            target="_blank"
+            aria-label="Universidad Tecnológica del Perú"
+          >
+            <img
+              src="https://s3.amazonaws.com/media.greatplacetowork.com/peru/best-workplaces-for-diversity-and-inclusion-in-peru/2024/utp/logo.jpg"
+              alt="Universidad Tecnológica del Perú"
+            />
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 CFBD. Todos los derechos reservados.</span>
+      </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
@@ -208,5 +320,106 @@
         crossorigin="anonymous"></script>
     <script src="productos.js"></script>
 </body>
+    <div
+      class="modal fade"
+      id="modalProductoEspecifico"
+      tabindex="-1"
+      aria-labelledby="modalProductoTitulo"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content borde-suave">
+          <div class="modal-header border-0 pb-0">
+            <span id="modal-categoria" class="badge-cat-modal">Categoría</span>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Cerrar"
+            ></button>
+          </div>
 
+          <div class="modal-body pt-2 pb-4 px-4">
+            <div id="modal-cargando" class="text-center py-5">
+              <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Cargando...</span>
+              </div>
+              <p class="mt-2 text-muted">Consultando detalles...</p>
+            </div>
+
+            <div
+              id="modal-error"
+              class="alert alert-danger"
+              style="display: none"
+            ></div>
+
+            <div
+              id="modal-detalle-contenido"
+              class="modal-grid-detalle"
+              style="display: none"
+            >
+              <div class="modal-columna-izquierda">
+                <div class="modal-img-wrapper">
+                  <img id="modal-img" src="" alt="Producto" />
+                </div>
+
+                <div id="modal-caracteristicas" class="prod-chips"></div>
+              </div>
+
+              <div class="modal-info-wrapper">
+                <h2 id="modal-producto-nombre" class="modal-titulo"></h2>
+                <div id="modal-precio" class="modal-precio"></div>
+                <p id="modal-stock" class="modal-stock-txt"></p>
+                <p id="modal-descripcion" class="modal-descripcion-txt"></p>
+
+                <hr class="my-3" />
+
+                <div class="modal-compra-bloque">
+                  <label class="fw-semibold mb-2">Cantidad para compra:</label>
+
+                  <div class="grupo-contador-modal">
+                    <button
+                      type="button"
+                      id="modal-btn-menos"
+                      class="btn-step-modal"
+                    >
+                      -
+                    </button>
+                    <span id="modal-display-cantidad" class="step-num">1</span>
+                    <button
+                      type="button"
+                      id="modal-btn-mas"
+                      class="btn-step-modal"
+                    >
+                      +
+                    </button>
+                  </div>
+
+                  <span id="modal-subtotal" class="modal-subtotal-txt">
+                    Subtotal: S/. 0.00
+                  </span>
+                </div>
+
+                <button
+                  type="button"
+                  id="modal-btn-confirmar"
+                  class="btn-modal-comprar mt-3"
+                >
+                  Añadir a la orden
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+    <script src="productos.js" defer></script>
+    <script src="producto-modal.js"></script>
+  </body>
 </html>
