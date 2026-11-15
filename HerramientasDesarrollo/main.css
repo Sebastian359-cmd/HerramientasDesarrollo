@@ -1305,3 +1305,216 @@
   height: 100%;
   object-fit: contain;
 }
+
+
+/* METODOLOGÍA SCRUM */
+
+.metodologia {
+  background: #0a0f1e;
+}
+
+.scrum-contenedor {
+  max-width: 1100px;
+  margin: auto;
+  padding: 32px;
+  background: #0d1426;
+  border: 1px solid #ffffff20;
+  border-radius: 16px;
+}
+
+.scrum-superior {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 35px;
+}
+
+.scrum-etiqueta {
+  color: #3b82f6;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.scrum-superior h3 {
+  color: white;
+  font-size: 28px;
+  margin: 8px 0 0;
+}
+
+.scrum-contador {
+  color: #93c5fd;
+  background: #2563eb25;
+  border: 1px solid #2563eb50;
+  border-radius: 30px;
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.scrum-slider {
+  overflow: hidden;
+}
+
+.sprint {
+  display: none;
+  animation: mostrarSprint 0.4s ease;
+}
+
+.sprint.activo {
+  display: block;
+}
+
+@keyframes mostrarSprint {
+  from {
+    opacity: 0;
+    transform: translateX(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.sprint-info {
+  margin-bottom: 25px;
+}
+
+.sprint-info h3 {
+  color: white;
+  font-size: 23px;
+  margin-bottom: 8px;
+}
+
+.sprint-info p {
+  color: #ffffff70;
+  font-size: 14px;
+  margin: 0;
+}
+
+.tabla-scroll {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.tabla-scrum {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 550px;
+}
+
+.tabla-scrum th {
+  text-align: left;
+  padding: 16px;
+  color: #93c5fd;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: #2563eb15;
+}
+
+.tabla-scrum td {
+  padding: 18px 16px;
+  color: #cbd5e1;
+  font-size: 13px;
+  border-bottom: 1px solid #ffffff15;
+}
+
+.tabla-scrum tbody tr:hover {
+  background: #ffffff08;
+}
+
+.estado {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 30px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.estado.completado {
+  color: #4ade80;
+  background: #22c55e20;
+}
+
+.estado.proceso {
+  color: #facc15;
+  background: #eab30820;
+}
+
+.estado.pendiente {
+  color: #94a3b8;
+  background: #64748b25;
+}
+
+.scrum-controles {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 30px;
+  padding-top: 22px;
+  border-top: 1px solid #ffffff15;
+}
+
+.scrum-btn {
+  background: #2563eb;
+  border: 1px solid #2563eb;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.scrum-btn:hover:not(:disabled) {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+}
+
+.scrum-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.scrum-puntos {
+  display: flex;
+  gap: 10px;
+}
+
+.scrum-puntos .punto {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: #64748b;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.scrum-puntos .punto.activo {
+  width: 25px;
+  border-radius: 10px;
+  background: #2563eb;
+}
+
+@media (max-width: 640px) {
+  .scrum-contenedor {
+    padding: 20px 14px;
+  }
+
+  .scrum-superior h3 {
+    font-size: 23px;
+  }
+
+  .scrum-controles {
+    gap: 10px;
+  }
+
+  .scrum-btn {
+    padding: 9px 10px;
+    font-size: 11px;
+  }
+}
