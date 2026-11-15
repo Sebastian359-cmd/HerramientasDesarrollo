@@ -234,6 +234,11 @@
   text-align: center;
   width: 80%;
   max-width: 800px;
+  font-weight: bold;
+  /* Sombra múltiple para crear un contraste nítido con el fondo */
+  text-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.8), 
+    0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .texto-carousel h1 {
