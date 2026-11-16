@@ -1,3 +1,4 @@
+
 const API_PUBLICA_PRODUCTOS =
   "https://sgt.azorweb.dev/api/public/web/productos";
 
@@ -8,9 +9,51 @@ let productoModalActual = null;
 let cantidadModal = 1;
 let modalBootstrapInstance = null;
 
-// Convierte una ruta de imagen relativa en una URL completa.
+// Guardamos las listas por separado para no consultar repetidamente.
+const cacheElementos = {
+  producto: null,
+  servicio: null
+};
+
+// Evita que una petición anterior sobrescriba una más reciente.
+let numeroSolicitud = 0;
+
+// Obtener un campo aunque tenga distintos nombres.
+function obtenerCampo(objeto, nombres) {
+  if (!objeto) return null;
+
+  for (const nombre of nombres) {
+    const valor = objeto[nombre];
+
+    if (
+      valor !== undefined &&
+      valor !== null &&
+      valor !== ""
+    ) {
+      return valor;
+    }
+  }
+
+  return null;
+}
+
+// Obtener el ID de cada elemento.
+function obtenerId(elemento) {
+  return obtenerCampo(elemento, [
+    "id",
+    "id_producto",
+    "id_servicio",
+    "producto_id",
+    "servicio_id"
+  ]);
+}
+
+// Convertir la imagen en URL completa.
 function resolverImagenModal(producto) {
-  const imagen = producto.url_img || producto.imagen;
+  const imagen = obtenerCampo(producto, [
+    "url_img",
+    "imagen"
+  ]);
 
   if (!imagen) return "";
 
@@ -18,229 +61,295 @@ function resolverImagenModal(producto) {
     return imagen;
   }
 
-  return (
-    "https://sgt.azorweb.dev" + (imagen.startsWith("/") ? "" : "/") + imagen
-  );
+  return "https://sgt.azorweb.dev" +
+    (imagen.startsWith("/") ? "" : "/") +
+    imagen;
 }
 
-// Obtiene el valor de un campo aunque tenga distintos nombres.
-function obtenerCampo(objeto, nombres) {
-  for (const nombre of nombres) {
-    if (
-      objeto[nombre] !== undefined &&
-      objeto[nombre] !== null &&
-      objeto[nombre] !== ""
-    ) {
-      return objeto[nombre];
-    }
-  }
-
-  return null;
-}
-
-// Genera los chips de características para el modal.
+// Obtener características.
 function generarCaracteristicas(elemento) {
-  const campos = [
+  let valor = obtenerCampo(elemento, [
     "caracteristicas",
     "caracteristica",
     "especificaciones",
     "atributos",
-    "tags",
-  ];
-
-  let valor = obtenerCampo(elemento, campos);
+    "tags"
+  ]);
 
   if (!valor) return [];
 
-  // Convierte un texto separado por comas en una lista.
   if (typeof valor === "string") {
-    valor = valor
-      .split(",")
-      .map((item) => item.trim())
-      .filter(Boolean);
+    valor = valor.split(",").map(item => item.trim());
   }
 
-  // Convierte un objeto en una lista de características.
   if (!Array.isArray(valor) && typeof valor === "object") {
     valor = Object.entries(valor).map(([clave, dato]) => {
-      if (dato === null || dato === undefined || dato === "") {
-        return clave;
-      }
-
-      if (typeof dato === "object") {
-        return `${clave}: ${JSON.stringify(dato)}`;
-      }
-
-      return `${clave}: ${dato}`;
+      return dato ? `${clave}: ${dato}` : clave;
     });
   }
 
   if (!Array.isArray(valor)) return [];
 
-  return valor
-    .map((caracteristica) => {
-      let texto = "";
+  return valor.map(caracteristica => {
+    if (
+      typeof caracteristica === "string" ||
+      typeof caracteristica === "number"
+    ) {
+      return String(caracteristica).trim();
+    }
 
-      if (
-        typeof caracteristica === "string" ||
-        typeof caracteristica === "number"
-      ) {
-        texto = String(caracteristica);
-      } else if (caracteristica && typeof caracteristica === "object") {
-        texto =
-          caracteristica.nombre ||
-          caracteristica.nombre_caracteristica ||
-          caracteristica.caracteristica ||
-          caracteristica.valor ||
-          caracteristica.descripcion ||
-          "";
-      }
+    if (caracteristica && typeof caracteristica === "object") {
+      return String(
+        caracteristica.nombre ||
+        caracteristica.nombre_caracteristica ||
+        caracteristica.caracteristica ||
+        caracteristica.valor ||
+        caracteristica.descripcion ||
+        ""
+      ).trim();
+    }
 
-      return String(texto).trim();
-    })
-    .filter(Boolean);
+    return "";
+  }).filter(Boolean);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const modalEl = document.getElementById("modalProductoEspecifico");
+// Obtener la lista de la API.
+function obtenerLista(datos, tipo) {
+  if (Array.isArray(datos)) return datos;
 
-  if (modalEl && window.bootstrap) {
-    modalBootstrapInstance = new bootstrap.Modal(modalEl);
-  } else if (modalEl) {
-    console.error(
-      "No se pudo inicializar el modal. Comprueba que Bootstrap JS esté cargado.",
-    );
+  const lista = tipo === "servicio"
+    ? datos.servicios || datos.data || datos.content
+    : datos.productos || datos.data || datos.content;
+
+  if (Array.isArray(lista)) return lista;
+
+  return [];
+}
+
+// Consultar productos o servicios.
+async function cargarElementos(tipo) {
+  if (cacheElementos[tipo]) {
+    return cacheElementos[tipo];
   }
 
-  document.getElementById("modal-btn-menos")?.addEventListener("click", () => {
-    if (cantidadModal > 1) {
-      cantidadModal--;
-      actualizarContadorModal();
+  const api = tipo === "servicio"
+    ? API_PUBLICA_SERVICIOS
+    : API_PUBLICA_PRODUCTOS;
+
+  const respuesta = await fetch(api);
+
+  if (!respuesta.ok) {
+    throw new Error(`Error HTTP ${respuesta.status}`);
+  }
+
+  const datos = await respuesta.json();
+
+  const elementos = obtenerLista(datos, tipo);
+
+  if (!elementos.length) {
+    throw new Error(`No se encontraron ${tipo}s en la API.`);
+  }
+
+  cacheElementos[tipo] = elementos;
+
+
+
+  return elementos;
+}
+
+
+
+// Inicializar el modal.
+document.addEventListener("DOMContentLoaded", () => {
+
+  const modalEl = document.getElementById(
+    "modalProductoEspecifico"
+  );
+
+  if (!modalEl || !window.bootstrap) {
+    console.error("No se pudo inicializar Bootstrap Modal.");
+    return;
+  }
+
+  modalBootstrapInstance = new bootstrap.Modal(modalEl);
+
+  // Evitar la advertencia de foco al ocultar el modal.
+  modalEl.addEventListener("hide.bs.modal", () => {
+    if (modalEl.contains(document.activeElement)) {
+      document.activeElement.blur();
     }
   });
 
-  document.getElementById("modal-btn-mas")?.addEventListener("click", () => {
-    const stock = obtenerCampo(productoModalActual || {}, [
-      "stock",
-      "cantidad_stock",
-      "existencias",
-    ]);
-
-    const max = stock === null ? 99 : Number(stock);
-
-    if (cantidadModal < max) {
-      cantidadModal++;
-      actualizarContadorModal();
-    }
+  modalEl.addEventListener("hidden.bs.modal", () => {
+    productoModalActual = null;
+    cantidadModal = 1;
   });
 
-  document
-    .getElementById("modal-btn-confirmar")
-    ?.addEventListener("click", () => {
+  document.getElementById("modal-btn-menos")
+    .addEventListener("click", () => {
+      if (cantidadModal > 1) {
+        cantidadModal--;
+        actualizarContadorModal();
+      }
+    });
+
+  document.getElementById("modal-btn-mas")
+    .addEventListener("click", () => {
+      if (!productoModalActual) return;
+
+      const stock = obtenerCampo(productoModalActual, [
+        "stock",
+        "cantidad_stock",
+        "existencias"
+      ]);
+
+      const max = stock === null ? 99 : Number(stock);
+
+      if (Number.isFinite(max) && cantidadModal < max) {
+        cantidadModal++;
+        actualizarContadorModal();
+      }
+    });
+
+  document.getElementById("modal-btn-confirmar")
+    .addEventListener("click", () => {
+
       if (!productoModalActual) return;
 
       const precio = obtenerCampo(productoModalActual, [
         "precio",
         "precio_venta",
-        "precioVenta",
+        "precioVenta"
       ]);
 
-      if (precio === null || !Number.isFinite(Number(precio))) {
-        alert("Este producto no tiene un precio disponible en la API.");
+      if (
+        precio === null ||
+        !Number.isFinite(Number(precio))
+      ) {
+        alert("Este elemento no tiene un precio disponible.");
         return;
       }
+
+      const stock = obtenerCampo(productoModalActual, [
+        "stock",
+        "cantidad_stock",
+        "existencias"
+      ]);
+
+      if (
+        stock !== null &&
+        (!Number.isFinite(Number(stock)) ||
+          Number(stock) < cantidadModal)
+      ) {
+        alert("No hay suficiente stock disponible.");
+        return;
+      }
+
+      const nombre = obtenerCampo(productoModalActual, [
+        "nombre",
+        "nombre_servicio"
+      ]) || "Sin nombre";
 
       const subtotal = Number(precio) * cantidadModal;
 
       alert(
-        `Seleccionaste:\n${cantidadModal} x ${productoModalActual.nombre}\n` +
-          `Subtotal: S/ ${subtotal.toFixed(2)}`,
+        `Seleccionaste:\n${cantidadModal} x ${nombre}\n` +
+        `Subtotal: S/ ${subtotal.toFixed(2)}`
       );
 
-      modalBootstrapInstance?.hide();
+      modalBootstrapInstance.hide();
     });
+
 });
 
-/**
- * Abre el modal y busca el producto o servicio en la API pública.
- * @param {number|string} idElemento
- * @param {"producto"|"servicio"} tipo
- */
-async function abrirDetalleProducto(idElemento, tipo = "producto") {
+// Abrir detalle de un producto o servicio.
+
+async function abrirDetalleProducto(slugElemento, tipo = "producto") {
+
+  const solicitudActual = ++numeroSolicitud;
+
   cantidadModal = 1;
+  productoModalActual = null;
 
   const loader = document.getElementById("modal-cargando");
   const errorBox = document.getElementById("modal-error");
   const contenido = document.getElementById("modal-detalle-contenido");
 
   if (!loader || !errorBox || !contenido) {
-    console.error("Faltan elementos HTML necesarios para el modal.");
+    console.error("Faltan elementos HTML del modal.");
     return;
   }
+
+  // Limpiar datos anteriores.
+  document.getElementById("modal-producto-nombre").textContent = "";
+  document.getElementById("modal-categoria").textContent = "";
+  document.getElementById("modal-descripcion").textContent = "";
+  document.getElementById("modal-precio").textContent = "";
+  document.getElementById("modal-stock").textContent = "";
+  document.getElementById("modal-caracteristicas").replaceChildren();
+
+  const img = document.getElementById("modal-img");
+  img.removeAttribute("src");
+  img.style.display = "none";
 
   loader.style.display = "block";
   errorBox.style.display = "none";
   contenido.style.display = "none";
 
+  actualizarContadorModal();
   modalBootstrapInstance?.show();
 
   try {
-    productoModalActual = null;
-
-    const api =
-      tipo === "servicio" ? API_PUBLICA_SERVICIOS : API_PUBLICA_PRODUCTOS;
-
-    const respuesta = await fetch(api);
-
-    if (!respuesta.ok) {
-      throw new Error(`Error HTTP ${respuesta.status} al consultar ${api}`);
+    if (tipo !== "producto" && tipo !== "servicio") {
+      throw new Error("Tipo de elemento no válido.");
     }
 
-    const datos = await respuesta.json();
+    const elementos = await cargarElementos(tipo);
 
-    const elementos = Array.isArray(datos)
-      ? datos
-      : datos.productos || datos.servicios || datos.data || datos.content || [];
+    if (solicitudActual !== numeroSolicitud) return;
 
-    if (!Array.isArray(elementos)) {
-      throw new Error("La API no devolvió una lista válida.");
-    }
 
-    productoModalActual = elementos.find(
-      (elemento) => String(elemento.id) === String(idElemento),
+
+    const elementoEncontrado = elementos.find(
+      elemento => String(elemento.slug) === String(slugElemento)
     );
 
-    if (!productoModalActual) {
-      throw new Error(`No se encontró el ${tipo} con ID ${idElemento}.`);
+    if (!elementoEncontrado) {
+      throw new Error(
+        `No se encontró el ${tipo} con slug ${slugElemento}.`
+      );
     }
 
-    const elemento = productoModalActual;
+    productoModalActual = elementoEncontrado;
 
-    const nombre = elemento.nombre || elemento.nombre_servicio || "Sin nombre";
+    const nombre = obtenerCampo(elementoEncontrado, [
+      "nombre",
+      "nombre_servicio"
+    ]) || "Sin nombre";
 
-    const categoria = obtenerCampo(elemento, [
+    const categoria = obtenerCampo(elementoEncontrado, [
       "categoria",
       "tipo_evento",
       "tipo",
-      "tipo_producto",
+      "tipo_producto"
     ]);
 
-    const descripcion = obtenerCampo(elemento, [
+    const descripcion = obtenerCampo(elementoEncontrado, [
       "descripcion",
       "descripcion_corta",
-      "descripcion_larga",
+      "descripcion_larga"
     ]);
 
-    const precio = obtenerCampo(elemento, [
+    const precio = obtenerCampo(elementoEncontrado, [
       "precio",
       "precio_venta",
-      "precioVenta",
+      "precioVenta"
     ]);
 
-    const stock = obtenerCampo(elemento, [
+    const stock = obtenerCampo(elementoEncontrado, [
       "stock",
       "cantidad_stock",
-      "existencias",
+      "existencias"
     ]);
 
     document.getElementById("modal-producto-nombre").textContent = nombre;
@@ -254,39 +363,32 @@ async function abrirDetalleProducto(idElemento, tipo = "producto") {
     document.getElementById("modal-precio").textContent =
       precio !== null && Number.isFinite(Number(precio))
         ? `S/ ${Number(precio).toFixed(2)}`
-        : "S/ 1500.00";
+        : "S/ 1500";
 
     document.getElementById("modal-stock").textContent =
       stock !== null
         ? `Stock disponible: ${stock} unidades`
-        : "99 unidades disponibles";
+        : "999 en stock";
 
-    // Mostrar las características en el modal.
+    // Características.
     const contenedorCaracteristicas = document.getElementById(
-      "modal-caracteristicas",
+      "modal-caracteristicas"
     );
 
-    if (contenedorCaracteristicas) {
-      contenedorCaracteristicas.replaceChildren();
+    const caracteristicas = generarCaracteristicas(elementoEncontrado);
 
-      const caracteristicas = generarCaracteristicas(elemento);
+    caracteristicas.forEach(texto => {
+      const chip = document.createElement("span");
+      chip.className = "prod-chip";
+      chip.textContent = texto;
+      contenedorCaracteristicas.appendChild(chip);
+    });
 
-      caracteristicas.forEach((texto) => {
-        const chip = document.createElement("span");
+    contenedorCaracteristicas.style.display =
+      caracteristicas.length ? "flex" : "none";
 
-        chip.className = "prod-chip";
-        chip.textContent = texto;
-
-        contenedorCaracteristicas.appendChild(chip);
-      });
-
-      contenedorCaracteristicas.style.display =
-        caracteristicas.length > 0 ? "flex" : "none";
-    }
-
-    // Mostrar la imagen.
-    const img = document.getElementById("modal-img");
-    const urlImagen = resolverImagenModal(elemento);
+    // Imagen.
+    const urlImagen = resolverImagenModal(elementoEncontrado);
 
     img.alt = nombre;
 
@@ -299,26 +401,30 @@ async function abrirDetalleProducto(idElemento, tipo = "producto") {
         img.removeAttribute("src");
         img.style.display = "none";
       };
-    } else {
-      img.removeAttribute("src");
-      img.style.display = "none";
     }
 
     actualizarContadorModal();
 
     loader.style.display = "none";
     contenido.style.display = "grid";
+
   } catch (error) {
-    console.error("Error al cargar el detalle:", error);
+    if (solicitudActual !== numeroSolicitud) return;
+
+    console.error("Error al cargar detalle:", error);
 
     loader.style.display = "none";
     contenido.style.display = "none";
+
     errorBox.textContent = error.message;
     errorBox.style.display = "block";
   }
 }
 
+
+// Actualizar cantidad y subtotal.
 function actualizarContadorModal() {
+
   const display = document.getElementById("modal-display-cantidad");
   const btnMenos = document.getElementById("modal-btn-menos");
   const btnMas = document.getElementById("modal-btn-mas");
@@ -329,24 +435,32 @@ function actualizarContadorModal() {
   const stock = obtenerCampo(productoModalActual || {}, [
     "stock",
     "cantidad_stock",
-    "existencias",
+    "existencias"
   ]);
 
   const precio = obtenerCampo(productoModalActual || {}, [
     "precio",
     "precio_venta",
-    "precioVenta",
+    "precioVenta"
   ]);
 
   display.textContent = cantidadModal;
+
   btnMenos.disabled = cantidadModal <= 1;
 
   const max = stock === null ? 99 : Number(stock);
-  btnMas.disabled = cantidadModal >= max;
 
-  if (precio !== null && Number.isFinite(Number(precio))) {
+  btnMas.disabled =
+    !Number.isFinite(max) || cantidadModal >= max;
+
+  if (
+    precio !== null &&
+    Number.isFinite(Number(precio))
+  ) {
     const subtotal = Number(precio) * cantidadModal;
-    txtSubtotal.textContent = `Subtotal: S/ ${subtotal.toFixed(2)}`;
+
+    txtSubtotal.textContent =
+      `Subtotal: S/ ${subtotal.toFixed(2)}`;
   } else {
     txtSubtotal.textContent = "Subtotal no disponible";
   }
