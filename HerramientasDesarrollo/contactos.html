@@ -98,7 +98,138 @@
         <button class="dot" data-index="2" aria-label="Ir al slide 3"></button>
       </div>
     </section>
-    <!-- AQUÍ IRÁ EL FORMULARIO -->
+    <!-- ==================== SECCIÓN FORMULARIO Y CANALES ==================== -->
+    <section class="contact-section" id="formulario-contacto">
+      <div class="section-header">
+        <span class="section-tag">CONTÁCTANOS</span>
+        <h2>Envíanos tu requerimiento</h2>
+        <p>Completa el formulario y nuestro equipo de ingeniería comercial se pondrá en contacto contigo en menos de 24 horas hábiles.</p>
+      </div>
+
+      <div class="contact-grid">
+        <!-- Tarjeta de Información Directa -->
+        <aside class="contact-info-card">
+          <h3>Canales de Atención</h3>
+          <p class="info-lead">Estamos listos para ayudarte a dimensionar tu proyecto tecnológico o resolver consultas comerciales.</p>
+
+          <div class="info-list">
+            <div class="info-item">
+              <div class="info-icon">📍</div>
+              <div>
+                <h4>Oficina Principal</h4>
+                <p>Los Laureles 104, Int. 206<br />Santiago de Surco 15023, Lima - Perú</p>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <div class="info-icon">📞</div>
+              <div>
+                <h4>Central de Ventas</h4>
+                <p><a href="tel:+51982345612">+51 982 345 612</a></p>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <div class="info-icon">✉️</div>
+              <div>
+                <h4>Correo Corporativo</h4>
+                <p><a href="mailto:contacto@cfbd.co">contacto@cfbd.co</a></p>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <div class="info-icon">🕒</div>
+              <div>
+                <h4>Horario de Atención</h4>
+                <p>Lunes a Viernes: 8:30 a.m. – 6:00 p.m.<br />Soporte Crítico AZOR: 24/7</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="info-footer-box">
+            <span>¿Ya eres cliente de CFBD?</span>
+            <a href="https://sgt.azorweb.dev/web/login" target="_blank" rel="noopener">Ingresar al Sistema de Gestión de Tickets &rarr;</a>
+          </div>
+        </aside>
+
+        <!-- Formulario de Contacto -->
+        <div class="contact-form-card">
+          <form id="contactForm" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="nombre">Nombre completo *</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Ej. Carlos Mendoza" required />
+                <small class="error-msg" id="error-nombre"></small>
+              </div>
+
+              <div class="form-group">
+                <label for="empresa">Empresa u Organización *</label>
+                <input type="text" id="empresa" name="empresa" placeholder="Ej. Seguridad Integral SAC" required />
+                <small class="error-msg" id="error-empresa"></small>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="email">Correo electrónico corporativo *</label>
+                <input type="email" id="email" name="email" placeholder="nombre@empresa.com" required />
+                <small class="error-msg" id="error-email"></small>
+              </div>
+
+              <div class="form-group">
+                <label for="telefono">Teléfono / WhatsApp *</label>
+                <input type="tel" id="telefono" name="telefono" placeholder="Ej. 987654321" maxlength="15" required />
+                <small class="error-msg" id="error-telefono"></small>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="servicio">Solución de interés *</label>
+                <select id="servicio" name="servicio" required>
+                  <option value="">Selecciona una opción...</option>
+                  <option value="Plataforma AZOR">Plataforma de Orquestación AZOR</option>
+                  <option value="Vigilancia IA">Analítica de Video con Inteligencia Artificial</option>
+                  <option value="Servidores e Infraestructura">Alquiler y Venta de Servidores / Redes</option>
+                  <option value="Ciberseguridad">Ciberseguridad y Cloud SaaS / IaaS</option>
+                  <option value="Soporte Técnico">Soporte Técnico / Otro requerimiento</option>
+                </select>
+                <small class="error-msg" id="error-servicio"></small>
+              </div>
+
+              <div class="form-group">
+                <label for="ruc">RUC (Opcional)</label>
+                <input type="text" id="ruc" name="ruc" placeholder="11 dígitos" maxlength="11" />
+                <small class="error-msg" id="error-ruc"></small>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="label-row">
+                <label for="mensaje">Detalle de tu consulta *</label>
+                <span class="char-counter" id="charCounter">0 / 500</span>
+              </div>
+              <textarea id="mensaje" name="mensaje" rows="4" maxlength="500" placeholder="Cuéntanos brevemente qué solución necesitas implementar..." required></textarea>
+              <small class="error-msg" id="error-mensaje"></small>
+            </div>
+
+            <div class="form-check">
+              <input type="checkbox" id="privacidad" name="privacidad" required />
+              <label for="privacidad">Acepto el tratamiento de mis datos personales para fines de atención comercial según la política de privacidad de CFBD SAC.</label>
+            </div>
+            <small class="error-msg" id="error-privacidad"></small>
+
+            <button type="submit" class="btn btn-primary btn-submit" id="submitBtn">
+              <span class="btn-text">Enviar mensaje</span>
+            </button>
+
+            <div class="form-alert success" id="formSuccess" hidden>
+              <strong>¡Mensaje enviado con éxito!</strong> Hemos registrado tu solicitud con el código <span id="ticketRef"></span>. Un asesor de CFBD te contactará pronto.
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
     <!-- AQUÍ IRÁ LA UBICACIÓN -->
   </main>
 
