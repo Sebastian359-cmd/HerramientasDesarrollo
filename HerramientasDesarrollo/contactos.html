@@ -47,7 +47,57 @@
   </header>
 
   <main id="main-content">
-    <!-- AQUÍ IRÁ EL SLIDER -->
+    <!-- ==================== SLIDER PRINCIPAL ==================== -->
+    <section class="hero-slider" aria-label="Destacados de contacto CFBD">
+      <div class="slides-wrapper" id="slidesWrapper">
+        <!-- Slide 1 -->
+        <article class="slide active" style="background-image: linear-gradient(90deg, rgba(8, 13, 26, 0.94) 35%, rgba(8, 13, 26, 0.65) 100%), url('img/empresa.jpg');">
+          <div class="slide-content">
+            <span class="slide-badge">ATENCIÓN EMPRESARIAL 24/7</span>
+            <h1>Conectemos tu infraestructura con el ecosistema AZOR</h1>
+            <p>Asesoría especializada en analítica de video con IA, ciberseguridad e integración de centros de monitoreo.</p>
+            <div class="slide-buttons">
+              <a href="#formulario-contacto" class="btn btn-primary">Solicitar cotización</a>
+              <a href="#ubicacion-negocio" class="btn btn-outline">Ver oficinas en Lima</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Slide 2 -->
+        <article class="slide" style="background-image: linear-gradient(90deg, rgba(8, 13, 26, 0.94) 35%, rgba(8, 13, 26, 0.65) 100%), url('img/historia.jpeg');">
+          <div class="slide-content">
+            <span class="slide-badge">SOPORTE Y TRAZABILIDAD SLA</span>
+            <h1>Respaldo técnico directo para operaciones críticas</h1>
+            <p>Más de 8 años implementando servidores empresariales y soluciones SaaS/IaaS para el sector público y privado.</p>
+            <div class="slide-buttons">
+              <a href="#formulario-contacto" class="btn btn-primary">Hablar con un especialista</a>
+              <a href="productos.html" class="btn btn-outline">Explorar catálogo</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Slide 3 -->
+        <article class="slide" style="background-image: linear-gradient(90deg, rgba(8, 13, 26, 0.94) 35%, rgba(8, 13, 26, 0.65) 100%), url('img/desarrollo.png');">
+          <div class="slide-content">
+            <span class="slide-badge">TRANSFORMACIÓN DIGITAL</span>
+            <h1>Agenda una demostración personalizada en vivo</h1>
+            <p>Conoce cómo AZOR orquesta alarmas, cámaras 4K y analítica en tiempo real desde una sola consola.</p>
+            <div class="slide-buttons">
+              <a href="#formulario-contacto" class="btn btn-primary">Agendar demo</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <button class="slider-arrow prev" id="prevSlide" aria-label="Slide anterior">&#10094;</button>
+      <button class="slider-arrow next" id="nextSlide" aria-label="Siguiente slide">&#10095;</button>
+
+      <div class="slider-dots" id="sliderDots">
+        <button class="dot active" data-index="0" aria-label="Ir al slide 1"></button>
+        <button class="dot" data-index="1" aria-label="Ir al slide 2"></button>
+        <button class="dot" data-index="2" aria-label="Ir al slide 3"></button>
+      </div>
+    </section>
     <!-- AQUÍ IRÁ EL FORMULARIO -->
     <!-- AQUÍ IRÁ LA UBICACIÓN -->
   </main>
