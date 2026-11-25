@@ -1,104 +1,91 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contactos | CFBD - Ecosistema AZOR</title>
-  <link rel="icon" href="img/LOGO CFBD.png" type="image/png" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CFBD | Contacto y Soporte</title>
+  <link rel="icon" href="img/desarrollo.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="main.css" />
   <link rel="stylesheet" href="contactos.css" />
 </head>
 <body>
 
-  <!-- ==================== NAVBAR UNIFICADO ==================== -->
-  <header class="navbar">
-    <div class="nav-container">
-      <a href="index.html" class="nav-brand">
-        <img src="img/LOGO CFBD.png" alt="Logo CFBD" class="nav-logo" />
-        <div class="nav-brand-text">
-          <span class="brand-title">CFBD</span>
-          <span class="brand-subtitle">Custom Field Business Development</span>
-        </div>
-      </a>
-
-      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-
-      <nav class="nav-menu" id="navMenu">
-        <ul class="nav-links">
-          <li><a href="index.html" class="nav-link">Inicio</a></li>
-          <li><a href="productos.html" class="nav-link">Productos</a></li>
-          <li><a href="nosotros.html" class="nav-link">Nosotros</a></li>
-          <li><a href="clientes.html" class="nav-link">Clientes</a></li>
-          <li><a href="contactos.html" class="nav-link active">Contactos</a></li>
-        </ul>
-
-        <div class="nav-actions">
-          <a href="productos.html#carrito" class="btn-cart" title="Ver carrito">
-            🛒 <span class="cart-badge" id="cartCount">0</span>
-          </a>
-          <a href="login.html" class="btn btn-outline">Iniciar sesión</a>
-          <a href="https://sgt.azorweb.dev/web/login" target="_blank" rel="noopener" class="btn btn-primary">Portal AZOR</a>
-        </div>
-      </nav>
+  <!-- ==================== NAVBAR UNIFICADO DEL PORTAL ==================== -->
+  <nav class="barra-navegacion">
+    <div class="nav-izquierda">
+      <div class="contenedor-logo">
+        <a href="index.html"><img src="img/LOGO CFBD.png" alt="Logo CFBD" /></a>
+      </div>
     </div>
-  </header>
 
+    <div class="enlaces-nav">
+      <a href="index.html">Inicio</a>
+      <a href="productos.html">Productos (AZOR)</a>
+      <a href="nosotros.html">Nosotros</a>
+      <a href="index.html#clientes">Clientes</a>
+      <a href="contactos.html" class="activo">Contacto</a>
+    </div>
+
+    <div class="botones-nav">
+      <a href="login.html" class="btn-ingresar">Iniciar sesión</a>
+      <a href="login.html?registro=true" class="btn-registro">Registrarse</a>
+    </div>
+  </nav>
+
+  <!-- ==================== SLIDER PRINCIPAL ==================== -->
+  <section class="hero-slider" aria-label="Destacados de contacto CFBD">
+    <div class="slides-wrapper" id="slidesWrapper">
+      <article class="slide active" style="background-image: linear-gradient(90deg, rgba(8, 13, 26, 0.94) 35%, rgba(8, 13, 26, 0.65) 100%), url('img/empresa.jpg');">
+        <div class="slide-content">
+          <span class="slide-badge">ATENCIÓN EMPRESARIAL 24/7</span>
+          <h1>Conectemos tu infraestructura con el ecosistema AZOR</h1>
+          <p>Asesoría especializada en analítica de video con IA, ciberseguridad e integración de centros de monitoreo.</p>
+          <div class="slide-buttons">
+            <a href="#formulario-contacto" class="btn btn-primary">Solicitar cotización</a>
+            <a href="#ubicacion-negocio" class="btn btn-outline">Ver oficinas en Lima</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="slide" style="background-image: linear-gradient(90deg, rgba(8, 13, 26, 0.94) 35%, rgba(8, 13, 26, 0.65) 100%), url('img/historia.jpeg');">
+        <div class="slide-content">
+          <span class="slide-badge">SOPORTE Y TRAZABILIDAD SLA</span>
+          <h1>Respaldo técnico directo para operaciones críticas</h1>
+          <p>Más de 8 años implementando servidores empresariales y soluciones SaaS/IaaS para el sector público y privado.</p>
+          <div class="slide-buttons">
+            <a href="#formulario-contacto" class="btn btn-primary">Hablar con un especialista</a>
+            <a href="productos.html" class="btn btn-outline">Explorar catálogo</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="slide" style="background-image: linear-gradient(90deg, rgba(8, 13, 26, 0.94) 35%, rgba(8, 13, 26, 0.65) 100%), url('img/desarrollo.png');">
+        <div class="slide-content">
+          <span class="slide-badge">TRANSFORMACIÓN DIGITAL</span>
+          <h1>Agenda una demostración personalizada en vivo</h1>
+          <p>Conoce cómo AZOR orquesta alarmas, cámaras 4K y analítica en tiempo real desde una sola consola.</p>
+          <div class="slide-buttons">
+            <a href="#formulario-contacto" class="btn btn-primary">Agendar demo</a>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <button class="slider-arrow prev" id="prevSlide" aria-label="Slide anterior">&#10094;</button>
+    <button class="slider-arrow next" id="nextSlide" aria-label="Siguiente slide">&#10095;</button>
+
+    <div class="slider-dots" id="sliderDots">
+      <button class="dot active" data-index="0" aria-label="Ir al slide 1"></button>
+      <button class="dot" data-index="1" aria-label="Ir al slide 2"></button>
+      <button class="dot" data-index="2" aria-label="Ir al slide 3"></button>
+    </div>
+  </section>
+
+  <!-- ==================== SECCIÓN FORMULARIO Y CANALES ==================== -->
   <main id="main-content">
-    <!-- ==================== SLIDER PRINCIPAL ==================== -->
-    <section class="hero-slider" aria-label="Destacados de contacto CFBD">
-      <div class="slides-wrapper" id="slidesWrapper">
-        <!-- Slide 1 -->
-        <article class="slide active" style="background-image: linear-gradient(90deg, rgba(8, 13, 26, 0.94) 35%, rgba(8, 13, 26, 0.65) 100%), url('img/empresa.jpg');">
-          <div class="slide-content">
-            <span class="slide-badge">ATENCIÓN EMPRESARIAL 24/7</span>
-            <h1>Conectemos tu infraestructura con el ecosistema AZOR</h1>
-            <p>Asesoría especializada en analítica de video con IA, ciberseguridad e integración de centros de monitoreo.</p>
-            <div class="slide-buttons">
-              <a href="#formulario-contacto" class="btn btn-primary">Solicitar cotización</a>
-              <a href="#ubicacion-negocio" class="btn btn-outline">Ver oficinas en Lima</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Slide 2 -->
-        <article class="slide" style="background-image: linear-gradient(90deg, rgba(8, 13, 26, 0.94) 35%, rgba(8, 13, 26, 0.65) 100%), url('img/historia.jpeg');">
-          <div class="slide-content">
-            <span class="slide-badge">SOPORTE Y TRAZABILIDAD SLA</span>
-            <h1>Respaldo técnico directo para operaciones críticas</h1>
-            <p>Más de 8 años implementando servidores empresariales y soluciones SaaS/IaaS para el sector público y privado.</p>
-            <div class="slide-buttons">
-              <a href="#formulario-contacto" class="btn btn-primary">Hablar con un especialista</a>
-              <a href="productos.html" class="btn btn-outline">Explorar catálogo</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Slide 3 -->
-        <article class="slide" style="background-image: linear-gradient(90deg, rgba(8, 13, 26, 0.94) 35%, rgba(8, 13, 26, 0.65) 100%), url('img/desarrollo.png');">
-          <div class="slide-content">
-            <span class="slide-badge">TRANSFORMACIÓN DIGITAL</span>
-            <h1>Agenda una demostración personalizada en vivo</h1>
-            <p>Conoce cómo AZOR orquesta alarmas, cámaras 4K y analítica en tiempo real desde una sola consola.</p>
-            <div class="slide-buttons">
-              <a href="#formulario-contacto" class="btn btn-primary">Agendar demo</a>
-            </div>
-          </div>
-        </article>
-      </div>
-
-      <button class="slider-arrow prev" id="prevSlide" aria-label="Slide anterior">&#10094;</button>
-      <button class="slider-arrow next" id="nextSlide" aria-label="Siguiente slide">&#10095;</button>
-
-      <div class="slider-dots" id="sliderDots">
-        <button class="dot active" data-index="0" aria-label="Ir al slide 1"></button>
-        <button class="dot" data-index="1" aria-label="Ir al slide 2"></button>
-        <button class="dot" data-index="2" aria-label="Ir al slide 3"></button>
-      </div>
-    </section>
-    <!-- ==================== SECCIÓN FORMULARIO Y CANALES ==================== -->
     <section class="contact-section" id="formulario-contacto">
       <div class="section-header">
         <span class="section-tag">CONTÁCTANOS</span>
@@ -107,7 +94,6 @@
       </div>
 
       <div class="contact-grid">
-        <!-- Tarjeta de Información Directa -->
         <aside class="contact-info-card">
           <h3>Canales de Atención</h3>
           <p class="info-lead">Estamos listos para ayudarte a dimensionar tu proyecto tecnológico o resolver consultas comerciales.</p>
@@ -117,15 +103,15 @@
               <div class="info-icon">📍</div>
               <div>
                 <h4>Oficina Principal</h4>
-                <p>Los Laureles 104, Int. 206<br />Santiago de Surco 15023, Lima - Perú</p>
+                <p>Los Laureles 104 Ofc. 508<br />Santiago de Surco 15039, Lima - Perú</p>
               </div>
             </div>
 
             <div class="info-item">
               <div class="info-icon">📞</div>
               <div>
-                <h4>Central de Ventas</h4>
-                <p><a href="tel:+51982345612">+51 982 345 612</a></p>
+                <h4>Contacto Comercial</h4>
+                <p><a href="tel:+51962315045">Carlos Barrientos — 962 315 045</a></p>
               </div>
             </div>
 
@@ -152,7 +138,6 @@
           </div>
         </aside>
 
-        <!-- Formulario de Contacto -->
         <div class="contact-form-card">
           <form id="contactForm" novalidate>
             <div class="form-row">
@@ -230,6 +215,7 @@
         </div>
       </div>
     </section>
+
     <!-- ==================== UBICACIÓN DEL NEGOCIO ==================== -->
     <section class="location-section" id="ubicacion-negocio">
       <div class="section-header">
@@ -243,7 +229,7 @@
           <span class="location-pill">Sede Central Lima</span>
           <h3>CFBD SAC — Custom Field Business Development</h3>
           <p class="location-address">
-            <strong>Dirección:</strong> Los Laureles 104, Int. 206, Urb. Valle Hermoso, Santiago de Surco 15023, Lima, Perú.
+            <strong>Dirección:</strong> Los Laureles 104 Ofc. 508, Santiago de Surco 15039, Lima, Perú.
           </p>
           <p class="location-ref">
             <strong>Referencia:</strong> A pocas cuadras de Av. Primavera y Av. El Polo.
@@ -261,7 +247,7 @@
         <div class="map-container">
           <iframe
             title="Ubicación de CFBD SAC en Santiago de Surco, Lima"
-            src="https://www.google.com/maps?q=Los+Laureles+104,+Santiago+de+Surco+15023,+Lima,+Peru&output=embed"
+            src="https://www.google.com/maps?q=Los+Laureles+104,+Santiago+de+Surco+15039,+Lima,+Peru&output=embed"
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
             allowfullscreen>
@@ -283,9 +269,9 @@
         <h4>Compañía</h4>
         <ul>
           <li><a href="index.html">Inicio</a></li>
-          <li><a href="productos.html">Productos y Servicios</a></li>
+          <li><a href="productos.html">Productos (AZOR)</a></li>
           <li><a href="nosotros.html">Sobre Nosotros</a></li>
-          <li><a href="clientes.html">Clientes</a></li>
+          <li><a href="index.html#clientes">Clientes</a></li>
         </ul>
       </div>
 
@@ -294,19 +280,25 @@
         <ul>
           <li><a href="productos.html">Plataforma AZOR</a></li>
           <li><a href="https://sgt.azorweb.dev/web/login" target="_blank" rel="noopener">Gestión de Tickets (SGT)</a></li>
-          <li><a href="contactos.html">Solicitar Demo</a></li>
+          <li><a href="contactos.html">Contacto</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
         <h4>Contacto</h4>
         <ul>
-          <li>Los Laureles 104, Int. 206</li>
-          <li>Santiago de Surco 15023</li>
+          <li>Los Laureles 104 Ofc. 508</li>
+          <li>Santiago de Surco 15039</li>
           <li>contacto@cfbd.co</li>
-          <li>Central: +51 982 345 612</li>
+          <li>Carlos Barrientos - 962315045</li>
         </ul>
-  </main>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 CFBD SAC (Custom Field Business Development). Todos los derechos reservados.</p>
+    </div>
+  </footer>
 
   <script src="contactos.js"></script>
 </body>
