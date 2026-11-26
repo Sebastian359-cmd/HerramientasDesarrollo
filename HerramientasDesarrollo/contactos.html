@@ -1,0 +1,315 @@
+﻿<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CFBD | Contacto</title>
+  <link rel="icon" href="img/desarrollo.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="main.css" />
+  <link rel="stylesheet" href="contactos.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
+</head>
+
+<body>
+  <!-- ==================== NAVBAR IGUAL A LAS DEMÁS PÁGINAS ==================== -->
+  <nav class="barra-navegacion">
+    <div class="nav-izquierda">
+      <div class="contenedor-logo">
+        <img src="img/LOGO CFBD.png" alt="Logo CFBD" />
+      </div>
+    </div>
+
+    <div class="enlaces-nav">
+      <a href="index.html">Inicio</a>
+      <a href="productos.html">Productos (AZOR)</a>
+      <a href="nosotros.html">Nosotros</a>
+      <a href="index.html#clientes">Clientes</a>
+      <a href="contactos.html">Contacto</a>
+    </div>
+
+    <div class="botones-nav">
+      <a href="login.html" class="btn-ingresar">Iniciar sesión</a>
+      <a href="login.html?registro=true" class="btn-registro">Registrarse</a>
+    </div>
+  </nav>
+
+  <!-- ==================== SLIDER IGUAL A INICIO ==================== -->
+  <div id="inicio">
+    <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="10000">
+          <img src="img/img2.jpeg" class="d-block w-100" alt="Instalaciones CFBD" height="500px" />
+        </div>
+
+        <div class="carousel-item" data-bs-interval="10000">
+          <img src="img/img1.jpeg" class="d-block w-100" alt="Instalaciones CFBD" height="500px" />
+        </div>
+
+        <div class="carousel-item" data-bs-interval="10000">
+          <img src="img/img3.jpeg" class="d-block w-100" alt="Instalaciones CFBD" height="500px" />
+        </div>
+
+        <div class="carousel-item" data-bs-interval="10000">
+          <img src="img/img4.jpeg" class="d-block w-100" alt="Instalaciones CFBD" height="500px" />
+        </div>
+      </div>
+
+      <div class="texto-carousel">
+        <h1>Contacto &amp; atención comercial</h1>
+        <p>
+          Conecta tu empresa con soluciones de inteligencia artificial,
+          analítica de video y ciberseguridad bajo el ecosistema AZOR.
+        </p>
+      </div>
+
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ==================== FORMULARIO Y UBICACIÓN ==================== -->
+  <main>
+    <section class="seccion" id="formulario-contacto">
+      <div class="cont">
+        <div class="cabecera">
+          <h2 class="titulo">Envíanos tu requerimiento</h2>
+          <p class="sub">
+            Completa el formulario y nuestro equipo comercial se pondrá en contacto contigo a la brevedad.
+          </p>
+        </div>
+
+        <div class="contact-form-wrapper">
+          <div class="contact-form-card">
+            <form id="contactForm" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="nombre">Nombre completo *</label>
+                  <input type="text" id="nombre" name="nombre" placeholder="Ej. Carlos Mendoza" required />
+                  <small class="error-msg" id="error-nombre"></small>
+                </div>
+
+                <div class="form-group">
+                  <label for="empresa">Empresa u Organización *</label>
+                  <input type="text" id="empresa" name="empresa" placeholder="Ej. Seguridad Integral SAC" required />
+                  <small class="error-msg" id="error-empresa"></small>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="email">Correo electrónico corporativo *</label>
+                  <input type="email" id="email" name="email" placeholder="nombre@empresa.com" required />
+                  <small class="error-msg" id="error-email"></small>
+                </div>
+
+                <div class="form-group">
+                  <label for="telefono">Teléfono / WhatsApp *</label>
+                  <input type="tel" id="telefono" name="telefono" placeholder="Ej. 962315045" maxlength="15" required />
+                  <small class="error-msg" id="error-telefono"></small>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="servicio">Solución de interés *</label>
+                  <select id="servicio" name="servicio" required>
+                    <option value="">Selecciona una opción...</option>
+                    <option value="Plataforma AZOR">Plataforma de Orquestación AZOR</option>
+                    <option value="Vigilancia IA">Analítica de Video con Inteligencia Artificial</option>
+                    <option value="Servidores e Infraestructura">Alquiler y Venta de Servidores / Redes</option>
+                    <option value="Ciberseguridad">Ciberseguridad y Cloud SaaS / IaaS</option>
+                    <option value="Asesoría Técnica">Asesoría Técnica / Otro requerimiento</option>
+                  </select>
+                  <small class="error-msg" id="error-servicio"></small>
+                </div>
+
+                <div class="form-group">
+                  <label for="ruc">RUC (Opcional)</label>
+                  <input type="text" id="ruc" name="ruc" placeholder="11 dígitos" maxlength="11" />
+                  <small class="error-msg" id="error-ruc"></small>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="label-row">
+                  <label for="mensaje">Detalle de tu consulta *</label>
+                  <span class="char-counter" id="charCounter">0 / 500</span>
+                </div>
+                <textarea id="mensaje" name="mensaje" rows="4" maxlength="500"
+                  placeholder="Cuéntanos brevemente qué solución necesitas implementar..." required></textarea>
+                <small class="error-msg" id="error-mensaje"></small>
+              </div>
+
+              <div class="form-check">
+                <input type="checkbox" id="privacidad" name="privacidad" required />
+                <label for="privacidad">Acepto el tratamiento de mis datos personales para fines de atención comercial según la política de privacidad de CFBD SAC.</label>
+              </div>
+              <small class="error-msg" id="error-privacidad"></small>
+
+              <button type="submit" class="btn-azul btn-submit" id="submitBtn">
+                <span class="btn-text">Enviar mensaje</span>
+              </button>
+
+              <div class="form-alert success" id="formSuccess" hidden>
+                <strong>¡Mensaje enviado con éxito!</strong> Hemos registrado tu solicitud con el código <span id="ticketRef"></span>. Un asesor de CFBD te contactará pronto.
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="seccion alt" id="ubicacion-negocio">
+      <div class="cont">
+        <div class="cabecera">
+          <h2 class="titulo">Visítanos en nuestras oficinas</h2>
+          <p class="sub">
+            Estamos ubicados en Santiago de Surco, Lima, con fácil acceso para reuniones técnicas y demostraciones.
+          </p>
+        </div>
+
+        <div class="location-card">
+          <div class="location-details">
+            <h3>CFBD SAC — Custom Field Business Development</h3>
+            <p class="location-address">
+              <strong>Dirección:</strong> Los Laureles 104 Ofc. 508, Santiago de Surco 15039, Lima, Perú.
+            </p>
+            <p class="location-ref">
+              <strong>Contacto comercial:</strong> Carlos Barrientos - 962315045 | contacto@cfbd.co
+            </p>
+            <div class="location-actions">
+              <a href="https://www.google.com/maps/search/?api=1&query=Los+Laureles+104+Santiago+de+Surco+Lima+Peru"
+                target="_blank" rel="noopener" class="btn-azul">
+                Abrir en Google Maps
+              </a>
+              <a href="https://ul.waze.com/ul?q=Los%20Laureles%20104%20Santiago%20de%20Surco%20Lima"
+                target="_blank" rel="noopener" class="btn-borde">
+                Ir con Waze
+              </a>
+            </div>
+          </div>
+
+          <div class="map-container">
+            <iframe title="Ubicación de CFBD SAC en Santiago de Surco, Lima"
+              src="https://www.google.com/maps?q=Los+Laureles+104,+Santiago+de+Surco+15039,+Lima,+Peru&output=embed"
+              loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== FOOTER IGUAL A LAS DEMÁS PÁGINAS ==================== -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="img/LOGO GRIS CFBD.png" alt="Logo CFBD" />
+        <p>
+          Transformamos organizaciones con infraestructura de servidores de alto rendimiento, analítica de video con IA y sistemas inteligentes bajo el ecosistema AZOR.
+        </p>
+      </div>
+
+      <div class="footer-links">
+        <div>
+          <h3>Empresa</h3>
+          <a href="index.html">Inicio</a>
+          <a href="productos.html">Productos (AZOR)</a>
+          <a href="nosotros.html">Nosotros</a>
+          <a href="index.html#clientes">Clientes</a>
+        </div>
+
+        <div>
+          <h3>Recursos</h3>
+          <a href="contactos.html">Contacto</a>
+          <a href="">Partners</a>
+          <a href="">Brochures</a>
+        </div>
+
+        <div>
+          <h3>Legal</h3>
+          <a href="">Privacidad</a>
+          <a href="">Términos</a>
+        </div>
+
+        <div>
+          <h3>Contacto</h3>
+          <span>Los Laureles 104 Ofc. 508</span>
+          <span>Santiago de Surco 15039</span>
+          <span>contacto@cfbd.co</span>
+          <span>Carlos Barrientos - 962315045</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-divider"></div>
+
+    <div class="footer-middle">
+      <div class="footer-social">
+        <span>Síguenos</span>
+
+        <div class="social-icons">
+          <a href="https://pe.linkedin.com/company/cfbd-sac" aria-label="LinkedIn" target="_blank">
+            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/linkedin.svg" alt="LinkedIn" />
+          </a>
+
+          <a href="https://www.facebook.com/" aria-label="Facebook" target="_blank">
+            <img src="https://cdn.simpleicons.org/facebook/ffffff" alt="Facebook" />
+          </a>
+
+          <a href="https://www.instagram.com/" aria-label="Instagram" target="_blank">
+            <img src="https://cdn.simpleicons.org/instagram/ffffff" alt="Instagram" />
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-socios">
+        <span>Rubros asociados</span>
+        <a href="https://www.hikvision.com/es-la/" target="_blank" aria-label="Hikvision">
+          <img src="img/hiklogo.png" alt="Hikvision logo" width="100 px" height="100 px" />
+        </a>
+        <a href="https://get.avigilon.com/" target="_blank" aria-label="Avigilon">
+          <img src="img/avigilon.png" alt="Avigilon logo" width="100 px" height="100px" />
+        </a>
+        <a href="https://irisity.com/es/" target="_blank" aria-label="Irisity">
+          <img src="img/iriscity.png" alt="Irisity logo" width="100 px" height="100 px" />
+        </a>
+      </div>
+
+      <div class="footer-utp">
+        <span>Proyecto académico</span>
+
+        <a href="https://www.utp.edu.pe/" target="_blank" aria-label="Universidad Tecnológica del Perú">
+          <img
+            src="https://s3.amazonaws.com/media.greatplacetowork.com/peru/best-workplaces-for-diversity-and-inclusion-in-peru/2024/utp/logo.jpg"
+            alt="Universidad Tecnológica del Perú" />
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 CFBD. Todos los derechos reservados.</span>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+  <script src="contactos.js"></script>
+</body>
+
+</html>

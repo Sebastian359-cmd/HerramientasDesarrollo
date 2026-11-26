@@ -1,0 +1,201 @@
+﻿/* Asegura que Bootstrap no altere el fondo ni la tipografía base de main.css */
+body {
+  background-color: #0a0f1e;
+  color: #ffffff;
+  font-family: "Inter", sans-serif;
+}
+
+#carouselExampleInterval .carousel-item img {
+  object-fit: cover;
+}
+
+/* ==================== FORMULARIO CENTRADO ==================== */
+.contact-form-wrapper {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.contact-form-card {
+  background: #0d1426;
+  border: 1px solid #ffffff20;
+  border-radius: 12px;
+  padding: 2.25rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.15rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.15rem;
+}
+
+.label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form-group label {
+  font-size: 0.86rem;
+  font-weight: 500;
+  margin-bottom: 0.4rem;
+  color: #ffffff;
+}
+
+.char-counter {
+  font-size: 0.76rem;
+  color: #ffffff60;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.72rem 0.9rem;
+  border-radius: 6px;
+  border: 1px solid #ffffff20;
+  background: #0a0f1e;
+  color: #ffffff;
+  font-family: "Inter", sans-serif;
+  font-size: 0.92rem;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #ffffff45;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px #2563eb30;
+}
+
+.form-group input.invalid,
+.form-group select.invalid,
+.form-group textarea.invalid {
+  border-color: #ef4444;
+}
+
+.error-msg {
+  color: #f87171;
+  font-size: 0.78rem;
+  min-height: 1.1em;
+  margin-top: 0.25rem;
+}
+
+.form-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  margin-top: 0.25rem;
+}
+
+.form-check input[type="checkbox"] {
+  margin-top: 0.25rem;
+  accent-color: #2563eb;
+}
+
+.form-check label {
+  font-size: 0.82rem;
+  color: #ffffff70;
+  line-height: 1.5;
+}
+
+.btn-submit {
+  width: 100%;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  text-align: center;
+}
+
+.form-alert {
+  margin-top: 1.15rem;
+  padding: 0.9rem 1rem;
+  border-radius: 6px;
+  font-size: 0.88rem;
+}
+
+.form-alert.success {
+  background: #22c55e20;
+  border: 1px solid #22c55e50;
+  color: #4ade80;
+}
+
+/* ==================== UBICACIÓN ==================== */
+.location-card {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  background: #0a0f1e;
+  border: 1px solid #ffffff20;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.location-details {
+  padding: 2.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.9rem;
+}
+
+.location-details h3 {
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 1.3;
+}
+
+.location-address,
+.location-ref {
+  font-size: 0.92rem;
+  color: #ffffff70;
+  line-height: 1.6;
+}
+
+.location-address strong,
+.location-ref strong {
+  color: #ffffff;
+}
+
+.location-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.map-container {
+  min-height: 340px;
+  width: 100%;
+}
+
+.map-container iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 340px;
+  border: 0;
+  display: block;
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 960px) {
+  .location-card {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
